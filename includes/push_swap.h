@@ -23,8 +23,8 @@
 
 typedef	struct s_stack
 {
-	t_list a;
-	t_list b;
+	t_list **a;
+	t_list **b;
 }	t_stack;
 
 

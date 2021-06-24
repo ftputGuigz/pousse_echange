@@ -58,13 +58,28 @@ int	input_conformity(char **buf, char *str)
 	return (1);
 }
 
-void	register_element(char ***buf, char *str)
+void	init_stack_a(int nb, t_stack *stack)
+{
+	t_list	*new_elem;
+	int 	*ptr;
+	void	*content;
+
+	content = malloc(sizeof(int));
+	if (!content)
+		return ;
+	content = ptr;
+	new_elem = ft_lstnew(content);
+	ft_lstadd_back(stack->a, new_elem);
+}
+
+void	register_element(char ***buf, char *str, t_stack *stack)
 {
 	int	number;
 
 	add_to_buffer(buf, str);
 	number = ft_atoi(str);
-	printf("number = %i\n", number);
+	//printf("number = %i\n", number);
+	init_stack_a(number, stack);
 }
 
 char **create_buffer(int ac)
@@ -90,22 +105,28 @@ int	register_datas(int ac, char **av, t_stack *stack)
 	int i;
 	char **buf;
 
-	(void) stack;
 	buf = create_buffer(ac);
 	if (!buf)
 		return (1);
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
 		if (!input_conformity(buf, av[i]))
 			return (1);
 		else
-			register_element(&buf, av[i]);
+			register_element(&buf, av[i], stack);
+		i++;
 	}
+	
 	free_double(buf);
 	return (0);
 }
 
+void	initialize_stack(t_stack *stack)
+{
+	stack->a = 0;
+	stack->b = 0;
+}
 
 int	main(int ac, char **av)
 {
@@ -114,7 +135,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		return (0);
-	//INITIALISER T_STACK ICI
+	initialize_stack(&stack);
 	ret = register_datas(ac, av, &stack);
 	if (ret)
 	{
