@@ -6,7 +6,7 @@
 #    By: gpetit <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/23 13:49:56 by gpetit            #+#    #+#              #
-#    Updated: 2021/06/24 13:01:41 by gpetit           ###   ########.fr        #
+#    Updated: 2021/06/24 14:46:10 by gpetit           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= push_swap
 
 CC= clang
 
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -g3
 
 LIBFT= -Llibft -lft 
 
@@ -29,7 +29,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

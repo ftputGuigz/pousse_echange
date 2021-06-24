@@ -6,7 +6,7 @@
 #    By: gpetit <gpetit@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 16:49:20 by gpetit            #+#    #+#              #
-#    Updated: 2021/05/16 12:34:41 by gpetit           ###   ########.fr        #
+#    Updated: 2021/06/24 14:22:31 by gpetit           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 SRCS = ft_calloc.c ft_isascii.c ft_itoa.c ft_memmove.c ft_putendl_fd.c ft_split.c \
 	ft_strjoin.c ft_strlen.c ft_dbstrlen.c ft_strnstr.c ft_substr.c ft_atoi.c ft_isalnum.c \

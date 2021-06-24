@@ -61,13 +61,12 @@ int	input_conformity(char **buf, char *str)
 void	init_stack_a(int nb, t_stack *stack)
 {
 	t_list	*new_elem;
-	int 	*ptr;
 	void	*content;
 
-	content = malloc(sizeof(int));
+	content = (int *)malloc(sizeof(int));
 	if (!content)
 		return ;
-	content = ptr;
+	*((int *)content) = nb;
 	new_elem = ft_lstnew(content);
 	ft_lstadd_back(stack->a, new_elem);
 }
@@ -78,7 +77,6 @@ void	register_element(char ***buf, char *str, t_stack *stack)
 
 	add_to_buffer(buf, str);
 	number = ft_atoi(str);
-	//printf("number = %i\n", number);
 	init_stack_a(number, stack);
 }
 
@@ -117,15 +115,24 @@ int	register_datas(int ac, char **av, t_stack *stack)
 			register_element(&buf, av[i], stack);
 		i++;
 	}
-	
+	t_list *lst;
+
+	lst = *(stack->a);
+	while (lst)
+	{
+		printf("RESULT = %i\n", *((int *)lst->content));
+		lst = lst->next;
+	}
 	free_double(buf);
 	return (0);
 }
 
 void	initialize_stack(t_stack *stack)
 {
-	stack->a = 0;
-	stack->b = 0;
+	stack->a = (t_list **)malloc(sizeof(t_list *));
+	stack->b = (t_list **)malloc(sizeof(t_list *));
+	*(stack->a) = 0;
+	*(stack->b) = 0;
 }
 
 int	main(int ac, char **av)
