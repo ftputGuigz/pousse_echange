@@ -14,8 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	int ret;
-	t_stack stack;
+	int		ret;
+	t_stack	stack;
 
 	if (ac == 1)
 	{

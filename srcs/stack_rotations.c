@@ -14,7 +14,7 @@
 
 void	ra(t_stack *stack)
 {
-	t_list *first;
+	t_list	*first;
 
 	if (!(*(stack->a)))
 		return ;
@@ -26,7 +26,7 @@ void	ra(t_stack *stack)
 
 void	rb(t_stack *stack)
 {
-	t_list *first;
+	t_list	*first;
 
 	if (!(*(stack->b)))
 		return ;

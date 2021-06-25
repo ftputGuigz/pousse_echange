@@ -14,7 +14,7 @@
 
 void	pa(t_stack *stack)
 {
-	t_list *first;
+	t_list	*first;
 
 	if (!(*(stack->b)))
 		return ;
@@ -25,7 +25,7 @@ void	pa(t_stack *stack)
 
 void	pb(t_stack *stack)
 {
-	t_list *first;
+	t_list	*first;
 
 	if (!(*(stack->a)))
 		return ;

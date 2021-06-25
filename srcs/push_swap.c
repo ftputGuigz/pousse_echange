@@ -21,35 +21,34 @@ void	print_list(t_list *lst)
 	}
 }
 
-void    printnumber(t_list *a, t_list *b)
+void	printnumber(t_list *a, t_list *b)
 {
-    t_list    *tmpa;
-    t_list    *tmpb;
+	t_list	*tmpa;
+	t_list	*tmpb;
 
-    tmpa = a;
-    tmpb = b;
-    printf("\e[H\e[2J");
-    printf("%11c   %-11c\n", 'a', 'b');
-
-    while (a || b)
-    {
-        if (a)
-        {
-            printf("%11d | ", *((int *)a->content));
-            a = a->next;
-        }
-        else
-            printf("%11s | ", "");
-        if (b)
-        {
-            printf("%-11d", *((int *)b->content));
-            b = b->next;
-        }
-        printf("\n");
-    }
-    a = tmpa;
-    b = tmpb;
-    sleep(1);
+	tmpa = a;
+	tmpb = b;
+	printf("\e[H\e[2J");
+	printf("%11c   %-11c\n", 'a', 'b');
+	while (a || b)
+	{
+		if (a)
+		{
+			printf("%11d | ", *((int *)a->content));
+			a = a->next;
+		}
+		else
+			printf("%11s | ", "");
+		if (b)
+		{
+			printf("%-11d", *((int *)b->content));
+			b = b->next;
+		}
+		printf("\n");
+	}
+	a = tmpa;
+	b = tmpb;
+	sleep(1);
 }
 
 void	push_swap(t_stack *stack)

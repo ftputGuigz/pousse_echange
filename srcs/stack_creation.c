@@ -35,7 +35,7 @@ int	register_element(char ***buf, char *str, t_stack *stack)
 {
 	int	number;
 
-	if (!(add_to_buffer(buf, str)))	
+	if (!(add_to_buffer(buf, str)))
 		return (0);
 	number = ft_atoi(str);
 	if (!(init_stack_a(number, stack)))
@@ -43,7 +43,7 @@ int	register_element(char ***buf, char *str, t_stack *stack)
 	return (1);
 }
 
-char **create_buffer(int ac)
+char	**create_buffer(int ac)
 {
 	char	**buf;
 	int		i;
@@ -58,14 +58,14 @@ char **create_buffer(int ac)
 			i++;
 		}
 	}
-	return(buf);
+	return (buf);
 }
 
 int	register_datas(int ac, char **av, t_stack *stack)
 {
-	int i;
-	int ret;
-	char **buf;
+	int		i;
+	int		ret;
+	char	**buf;
 
 	buf = create_buffer(ac);
 	if (!buf)

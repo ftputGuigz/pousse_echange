@@ -68,7 +68,7 @@ int	is_valid_digit(char *str)
 
 int	input_conformity(char **buf, char *str)
 {
-	if (!is_valid_digit(str) || search_doublon(buf, str) || !is_an_int(str))	
+	if (!is_valid_digit(str) || search_doublon(buf, str) || !is_an_int(str))
 		return (0);
 	else
 		return (1);
