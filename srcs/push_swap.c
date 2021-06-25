@@ -69,8 +69,6 @@ void	push_swap(t_stack *stack)
 	printnumber(*(stack->a), *(stack->b));
 	pa(stack);
 	printnumber(*(stack->a), *(stack->b)); */
-	ra(stack);
-	printnumber(*(stack->a), *(stack->b));
-	rb(stack);
+	rra(stack);
 	printnumber(*(stack->a), *(stack->b));
 }
