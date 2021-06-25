@@ -27,5 +27,11 @@ typedef	struct s_stack
 	t_list **b;
 }	t_stack;
 
+void	initialize_stack(t_stack *stack);
+int		register_datas(int ac, char **av, t_stack *stack);
+void	free_stack_ptr(t_stack *stack);
+void	del(void *content);
+int		add_to_buffer(char ***buf, char *str);
+int		input_conformity(char **buf, char *str);
 
 #endif
