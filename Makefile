@@ -19,7 +19,8 @@ CFLAGS= -Wall -Wextra -Werror -g3
 LIBFT= -Llibft -lft 
 
 SRCS= $(addprefix srcs/, main.c init.c free.c stack_creation.c \
-	input_conformity.c)
+	input_conformity.c push_swap.c stack_exchanges.c stack_rotations.c \
+	stack_reverse_rotations.c)
 
 OBJS= $(SRCS:.c=.o)
 

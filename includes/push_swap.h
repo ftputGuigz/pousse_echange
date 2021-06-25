@@ -33,5 +33,17 @@ void	free_stack_ptr(t_stack *stack);
 void	del(void *content);
 int		add_to_buffer(char ***buf, char *str);
 int		input_conformity(char **buf, char *str);
+void	push_swap(t_stack *stack);
+
+//LIST MOVEMENTS
+void	sa(t_stack *stack);
+void	sb(t_stack *stack);
+void	ss(t_stack *stack);
+void	pa(t_stack *stack);
+void	pb(t_stack *stack);
+void	ra(t_stack *stack);
+void	rb(t_stack *stack);
+void	rr(t_stack *stack);
+
 
 #endif
