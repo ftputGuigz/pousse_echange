@@ -21,6 +21,8 @@ void	pa(t_stack *stack)
 	first = *(stack->b);
 	*(stack->b) = first->next;
 	ft_lstadd_front(stack->a, first);
+	
+	printnumber(*(stack->a), *(stack->b));
 }
 
 void	pb(t_stack *stack)
@@ -32,6 +34,8 @@ void	pb(t_stack *stack)
 	first = *(stack->a);
 	*(stack->a) = first->next;
 	ft_lstadd_front(stack->b, first);
+
+	printnumber(*(stack->a), *(stack->b));
 }
 
 void	sa(t_stack *stack)
@@ -50,6 +54,8 @@ void	sa(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	*stack->a = second;
+
+	printnumber(*(stack->a), *(stack->b));
 }
 
 void	sb(t_stack *stack)
@@ -68,6 +74,8 @@ void	sb(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	*stack->b = second;
+
+	printnumber(*(stack->a), *(stack->b));
 }
 
 void	ss(t_stack *stack)

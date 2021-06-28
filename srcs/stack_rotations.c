@@ -22,6 +22,8 @@ void	ra(t_stack *stack)
 	*(stack->a) = first->next;
 	first->next = 0;
 	ft_lstadd_back(stack->a, first);
+
+	printnumber(*(stack->a), *(stack->b));
 }
 
 void	rb(t_stack *stack)
@@ -34,6 +36,8 @@ void	rb(t_stack *stack)
 	*(stack->b) = first->next;
 	first->next = 0;
 	ft_lstadd_back(stack->b, first);
+
+	printnumber(*(stack->a), *(stack->b));
 }
 
 void	rr(t_stack *stack)

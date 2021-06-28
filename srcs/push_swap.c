@@ -12,15 +12,6 @@
 
 #include "push_swap.h"
 
-void	print_list(t_list *lst)
-{
-	while (lst)
-	{
-		printf("%i\n", *((int *)(lst->content)));
-		lst = lst->next;
-	}
-}
-
 void	printnumber(t_list *a, t_list *b)
 {
 	t_list	*tmpa;
@@ -51,27 +42,33 @@ void	printnumber(t_list *a, t_list *b)
 	sleep(1);
 }
 
+int	is_sorted(t_list *lst)
+{
+	while (lst->next)
+	{
+		if (*((int *)lst->content) > *((int *)lst->next->content))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
 void	push_swap(t_stack *stack)
 {
- 	printnumber(*(stack->a), *(stack->b));
-	pb(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pb(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pb(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pb(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pb(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pb(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pa(stack);
-	printnumber(*(stack->a), *(stack->b));
-	pa(stack);
-	printnumber(*(stack->a), *(stack->b));
-	sa(stack);
-	printnumber(*(stack->a), *(stack->b));
-	rrr(stack);
-	printnumber(*(stack->a), *(stack->b));
+	int	size;
+
+	size = ft_lstsize(*(stack.a));
+	if (is_sorted(*(stack.a)) || size == 1))
+		return (0);
+	if (size <= 6)
+	{
+		printnumber(*(stack->a), *(stack->b));
+		pb(stack);
+		pb(stack);
+		sa(stack);
+		rra(stack);
+		pa(stack);
+		pa(stack);
+		rra(stack);
+	}
 }

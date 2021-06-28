@@ -34,6 +34,8 @@ void	del(void *content);
 int		add_to_buffer(char ***buf, char *str);
 int		input_conformity(char **buf, char *str);
 void	push_swap(t_stack *stack);
+int		is_sorted(t_list *lst);
+void	printnumber(t_list *a, t_list *b);
 
 //LIST MOVEMENTS
 void	sa(t_stack *stack);
