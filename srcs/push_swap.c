@@ -54,20 +54,24 @@ void	printnumber(t_list *a, t_list *b)
 void	push_swap(t_stack *stack)
 {
  	printnumber(*(stack->a), *(stack->b));
-/*	sa(stack);
+	pb(stack);
+	printnumber(*(stack->a), *(stack->b));
+	pb(stack);
 	printnumber(*(stack->a), *(stack->b));
 	pb(stack);
 	printnumber(*(stack->a), *(stack->b));
 	pb(stack);
 	printnumber(*(stack->a), *(stack->b));
-	sb(stack);
+	pb(stack);
+	printnumber(*(stack->a), *(stack->b));
+	pb(stack);
 	printnumber(*(stack->a), *(stack->b));
 	pa(stack);
 	printnumber(*(stack->a), *(stack->b));
 	pa(stack);
 	printnumber(*(stack->a), *(stack->b));
-	pa(stack);
-	printnumber(*(stack->a), *(stack->b)); */
-	rra(stack);
+	sa(stack);
+	printnumber(*(stack->a), *(stack->b));
+	rrr(stack);
 	printnumber(*(stack->a), *(stack->b));
 }

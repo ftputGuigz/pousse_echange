@@ -46,7 +46,7 @@ void	rrb(t_stack *stack)
 
 	if (!(*(stack->b)))
 		return ;
-	size = ft_lstsize(*(stack->a));
+	size = ft_lstsize(*(stack->b));
 	if (size == 1)
 		return ;
 	last = ft_lstlast(*(stack->b));

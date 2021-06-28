@@ -14,6 +14,8 @@
 
 void	free_stack_ptr(t_stack *stack)
 {
+	ft_lstclear(stack->a, del);
+	ft_lstclear(stack->b, del);
 	if (stack->a)
 		free(stack->a);
 	if (stack->b)
