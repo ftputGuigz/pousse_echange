@@ -57,18 +57,10 @@ void	push_swap(t_stack *stack)
 {
 	int	size;
 
-	size = ft_lstsize(*(stack.a));
-	if (is_sorted(*(stack.a)) || size == 1))
-		return (0);
-	if (size <= 6)
-	{
-		printnumber(*(stack->a), *(stack->b));
-		pb(stack);
-		pb(stack);
-		sa(stack);
-		rra(stack);
-		pa(stack);
-		pa(stack);
-		rra(stack);
-	}
+	size = ft_lstsize(*(stack->a));
+	if (is_sorted(*(stack->a)) || size == 1)
+		return ;
+	printnumber(*stack->a, *stack->b);
+	if (size <= 3)
+		sort_mini_list(stack, 'a');
 }

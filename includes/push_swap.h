@@ -50,4 +50,7 @@ void	rra(t_stack *stack);
 void	rrb(t_stack *stack);
 void	rrr(t_stack *stack);
 
+//SORTING ALGO
+void	sort_mini_list(t_stack *stack, char stack_id);
+
 #endif
