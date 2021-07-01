@@ -56,6 +56,7 @@ int	is_sorted(t_list *lst)
 void	inject_b_in_a(t_stack *stack)
 {
 	t_list *lst;
+	int	last;
 	int	mvmt;
 	int first;
 	int second;
@@ -65,15 +66,17 @@ void	inject_b_in_a(t_stack *stack)
 	while (*(stack->b))
 	{
 		d = *(int *)((*(stack->b))->content);
+		last = *((int *)(ft_lstlast(*(stack->a))->content));
 		lst = *(stack->a);
 		first = *((int *)lst->content);
 		second = *((int *)lst->next->content);
-		while ((!(d > first && d < second) && first != stack->a_min) && lst->next)
+		while ((!(d > first && d < second) && (!(d < first && d > last)) && !(first == stack->a_min && d < first) && lst->next))
 		{
 			lst = lst->next;
 			first = *((int *)lst->content);
 			if (lst->next)
 				second = *((int *)(lst->next->content));
+			last = *((int *)(ft_lstlast(*(stack->a))->content));
 			mvmt++;
 		}
 		if (d > first && d < second)
@@ -144,7 +147,7 @@ void	push_swap(t_stack *stack)
 	printnumber(*stack->a, *stack->b);
 	if (size <= 3)
 		sort_mini_list(stack, 'a');
-	else if (size > 3 && size <= 5)
+	else if (size > 3 && size <= 6)
 		sort_3_to_5(stack);
 	printf("MOVES = [%d]\n", moves);
 }
