@@ -70,7 +70,7 @@ void	inject_b_in_a(t_stack *stack)
 		lst = *(stack->a);
 		first = *((int *)lst->content);
 		second = *((int *)lst->next->content);
-		while ((!(d > first && d < second) && (!(d < first && d > last)) && !(first == stack->a_min && d < first) && lst->next))
+		while ((!(d > first && d < second) && (!(d < first && d > last)) && !(first == stack->a_min && d < first) && !(last == stack->a_max && d > last) && lst->next))
 		{
 			lst = lst->next;
 			first = *((int *)lst->content);
