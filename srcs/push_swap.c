@@ -53,6 +53,50 @@ int	is_sorted(t_list *lst)
 	return (1);
 }
 
+void	inject_b_in_a(t_stack *stack)
+{
+	t_list *lst;
+	int	mvmt;
+	int first;
+	int second;
+	int d;
+
+	mvmt = 0;
+	while (*(stack->b))
+	{
+		lst = *(stack->a);
+		first = *((int *)lst->content);
+		second = *((int *)lst->next->content);
+		d = *(int *)((*(stack->b))->content);
+		while ((!(d > first && d < second) && !(d < first)) && lst->next)
+		{
+			lst = lst->next;
+			first = *((int *)lst->content);
+			if (lst->next)
+				second = *((int *)(lst->next->content));
+			mvmt++;
+		}
+		if (d > first && d < second)
+			mvmt++;
+		printf("first = [%d]\nsecond = [%d]\n", first, second);
+		while (mvmt)
+		{
+			ra(stack);
+			mvmt--;
+		}
+		if (*(stack->b))
+			pa(stack);
+	}
+}
+
+void	sort_3_to_5(t_stack *stack)
+{
+	while (ft_lstsize(*(stack->a)) != 3)
+		pb(stack);
+	sort_mini_list(stack, 'a');
+	inject_b_in_a(stack);
+}
+
 void	push_swap(t_stack *stack)
 {
 	int	size;
@@ -63,4 +107,6 @@ void	push_swap(t_stack *stack)
 	printnumber(*stack->a, *stack->b);
 	if (size <= 3)
 		sort_mini_list(stack, 'a');
+	else if (size > 3 && size <= 5)
+		sort_3_to_5(stack);
 }

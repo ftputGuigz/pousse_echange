@@ -14,6 +14,10 @@
 
 void	initialize_stack(t_stack *stack)
 {
+	stack->a_min = 0;
+	stack->a_max = 0;
+	stack->b_min = 0;
+	stack->b_max = 0;
 	stack->a = (t_list **)malloc(sizeof(t_list *));
 	stack->b = (t_list **)malloc(sizeof(t_list *));
 	*(stack->a) = 0;

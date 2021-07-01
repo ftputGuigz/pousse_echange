@@ -65,6 +65,7 @@ void	sort_mini_list(t_stack *stack, char stack_id)
 	if (!((a < b && b < c) || (a > b && b < c && a > c) || \
 	(a < b && b > c && a > c)))
 		rotate_head(stack, stack_id);
+	lst = identify_lst(stack, stack_id);
 	get_a_b_c(&a, &b, &c, lst);
 	if (b > a && b > c)
 		move_list_down(stack, stack_id);
