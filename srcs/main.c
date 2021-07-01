@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 	int		ret;
 	t_stack	stack;
 
+	moves = 0;
 	if (ac == 1)
 	{
 		ft_putstr_fd("Error\n", 2);

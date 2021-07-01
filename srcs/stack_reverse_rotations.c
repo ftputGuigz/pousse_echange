@@ -37,6 +37,7 @@ void	rra(t_stack *stack)
 	penultimate->next = NULL;
 	ft_lstadd_front(stack->a, last);
 
+	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -56,6 +57,7 @@ void	rrb(t_stack *stack)
 	penultimate->next = NULL;
 	ft_lstadd_front(stack->b, last);
 
+	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -63,4 +65,5 @@ void	rrr(t_stack *stack)
 {
 	rra(stack);
 	rrb(stack);
+	moves--;
 }

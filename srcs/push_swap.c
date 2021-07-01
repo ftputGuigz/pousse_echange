@@ -64,11 +64,11 @@ void	inject_b_in_a(t_stack *stack)
 	mvmt = 0;
 	while (*(stack->b))
 	{
+		d = *(int *)((*(stack->b))->content);
 		lst = *(stack->a);
 		first = *((int *)lst->content);
 		second = *((int *)lst->next->content);
-		d = *(int *)((*(stack->b))->content);
-		while ((!(d > first && d < second) && !(d < first)) && lst->next)
+		while ((!(d > first && d < second) && first != stack->a_min) && lst->next)
 		{
 			lst = lst->next;
 			first = *((int *)lst->content);
@@ -78,11 +78,24 @@ void	inject_b_in_a(t_stack *stack)
 		}
 		if (d > first && d < second)
 			mvmt++;
-		printf("first = [%d]\nsecond = [%d]\n", first, second);
-		while (mvmt)
+		int size = ft_lstsize(*(stack->a));
+		printf("size = %d\nmvmt = %d\n", size, mvmt);
+		if (mvmt <= size / 2)
+		{	
+			while (mvmt)
+			{
+				ra(stack);
+				mvmt--;
+			}
+		}
+		if (mvmt > size / 2)
 		{
-			ra(stack);
-			mvmt--;
+			mvmt = size - mvmt;
+			while (mvmt)
+			{
+				rra(stack);
+				mvmt--;
+			}
 		}
 		if (*(stack->b))
 			pa(stack);
@@ -91,10 +104,34 @@ void	inject_b_in_a(t_stack *stack)
 
 void	sort_3_to_5(t_stack *stack)
 {
+	int	position;
+	int	size;
+
 	while (ft_lstsize(*(stack->a)) != 3)
 		pb(stack);
 	sort_mini_list(stack, 'a');
 	inject_b_in_a(stack);
+	position = locate_min(stack);
+	size = ft_lstsize(*(stack->a));
+	if (!position)
+		return ;
+	if (position <= size / 2)
+	{
+		while (position)
+		{
+			ra(stack);
+			position--;
+		}
+	}
+	if (position > size / 2)
+	{
+		position = size - position;
+		while (position)
+		{
+			rra(stack);
+			position--;
+		}
+	}
 }
 
 void	push_swap(t_stack *stack)
@@ -109,4 +146,5 @@ void	push_swap(t_stack *stack)
 		sort_mini_list(stack, 'a');
 	else if (size > 3 && size <= 5)
 		sort_3_to_5(stack);
+	printf("MOVES = [%d]\n", moves);
 }

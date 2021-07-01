@@ -21,6 +21,8 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
+int	moves;
+
 typedef	struct s_stack
 {
 	t_list **a;
@@ -55,6 +57,8 @@ void	rrb(t_stack *stack);
 void	rrr(t_stack *stack);
 
 //SORTING ALGO
+void	stacks_min_max(t_stack *stack);
 void	sort_mini_list(t_stack *stack, char stack_id);
+int		locate_min(t_stack *stack);
 
 #endif

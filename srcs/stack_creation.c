@@ -86,5 +86,6 @@ int	register_datas(int ac, char **av, t_stack *stack)
 		i++;
 	}
 	free_double(buf);
+	stacks_min_max(stack);
 	return (1);
 }

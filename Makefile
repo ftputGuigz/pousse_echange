@@ -20,7 +20,7 @@ LIBFT= -Llibft -lft
 
 SRCS= $(addprefix srcs/, main.c init.c free.c stack_creation.c \
 	input_conformity.c push_swap.c stack_exchanges.c stack_rotations.c \
-	stack_reverse_rotations.c sort_mini_list.c)
+	stack_reverse_rotations.c sort_mini_list.c stack_metrics.c)
 
 OBJS= $(SRCS:.c=.o)
 

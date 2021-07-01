@@ -21,7 +21,9 @@ void	pa(t_stack *stack)
 	first = *(stack->b);
 	*(stack->b) = first->next;
 	ft_lstadd_front(stack->a, first);
-	
+	stacks_min_max(stack);
+
+	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -34,7 +36,9 @@ void	pb(t_stack *stack)
 	first = *(stack->a);
 	*(stack->a) = first->next;
 	ft_lstadd_front(stack->b, first);
+	stacks_min_max(stack);
 
+	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -55,6 +59,7 @@ void	sa(t_stack *stack)
 	second->next = first;
 	*stack->a = second;
 
+	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -75,6 +80,7 @@ void	sb(t_stack *stack)
 	second->next = first;
 	*stack->b = second;
 
+	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -82,4 +88,5 @@ void	ss(t_stack *stack)
 {
 	sa(stack);
 	sb(stack);
+	moves--;
 }
