@@ -31,7 +31,7 @@ int	init_stack_a(int nb, t_stack *stack)
 	return (1);
 }
 
-int	register_element(char ***buf, char *str, t_stack *stack)
+int	register_element(int ***buf, char *str, t_stack *stack)
 {
 	int	number;
 
@@ -43,18 +43,18 @@ int	register_element(char ***buf, char *str, t_stack *stack)
 	return (1);
 }
 
-char	**create_buffer(int ac)
+int	**create_buffer(int ac)
 {
-	char	**buf;
+	int 	**buf;
 	int		i;
 
 	i = 0;
-	buf = malloc(sizeof(char *) * ac);
+	buf = (int **)malloc(sizeof(int *) * ac);
 	if (buf)
 	{
 		while (i < ac)
 		{
-			buf[i] = 0;
+			buf[i] = NULL;
 			i++;
 		}
 	}
@@ -65,7 +65,7 @@ int	register_datas(int ac, char **av, t_stack *stack)
 {
 	int		i;
 	int		ret;
-	char	**buf;
+	int		**buf;
 
 	buf = create_buffer(ac);
 	if (!buf)
@@ -79,13 +79,13 @@ int	register_datas(int ac, char **av, t_stack *stack)
 			ret = register_element(&buf, av[i], stack);
 		if (!ret)
 		{
-			free_double(buf);
+			free_double_int(buf);
 			ft_lstclear(stack->a, del);
 			return (0);
 		}
 		i++;
 	}
-	free_double(buf);
+	free_double_int(buf);
 	stacks_min_max(stack);
 	return (1);
 }

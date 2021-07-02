@@ -12,25 +12,26 @@
 
 #include "push_swap.h"
 
-int	add_to_buffer(char ***buf, char *str)
+int	add_to_buffer(int ***buf, char *str)
 {
 	static int	i = 0;
 
-	(*buf)[i] = ft_strdup(str);
+	(*buf)[i] = malloc(sizeof(int));
 	if (!((*buf)[i]))
 		return (0);
+	*((*buf)[i]) = (int)ft_atoi(str);
 	i++;
 	return (1);
 }
 
-int	search_doublon(char **buf, char *str)
+int	search_doublon(int **buf, char *str)
 {
 	int	i;
 
 	i = 0;
 	while (buf[i])
 	{
-		if (!ft_strcmp(buf[i], str))
+		if (*(buf[i]) == ft_atoi(str))
 			return (1);
 		i++;
 	}
@@ -66,7 +67,7 @@ int	is_valid_digit(char *str)
 	return (1);
 }
 
-int	input_conformity(char **buf, char *str)
+int	input_conformity(int **buf, char *str)
 {
 	if (!is_valid_digit(str) || search_doublon(buf, str) || !is_an_int(str))
 		return (0);
