@@ -37,22 +37,6 @@ void	rotate_head(t_stack *stack, char stack_id)
 		sb(stack);
 }
 
-static void	move_list_down(t_stack *stack, char stack_id)
-{
-	if (stack_id == 'a')
-		rra(stack);
-	else
-		rrb(stack);
-}
-
-static void	move_list_up(t_stack *stack, char stack_id)
-{
-	if (stack_id == 'a')
-		ra(stack);
-	else
-		rb(stack);
-}
-
 void	sort_mini_list(t_stack *stack, char stack_id)
 {
 	t_list *lst;
@@ -65,10 +49,4 @@ void	sort_mini_list(t_stack *stack, char stack_id)
 	if (!((a < b && b < c) || (a > b && b < c && a > c) || \
 	(a < b && b > c && a > c)))
 		rotate_head(stack, stack_id);
-	lst = identify_lst(stack, stack_id);
-	get_a_b_c(&a, &b, &c, lst);
-	if (b > a && b > c)
-		move_list_down(stack, stack_id);
-	if (b < a && b < c)
-		move_list_up(stack, stack_id);
 }

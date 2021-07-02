@@ -70,14 +70,49 @@ void	stacks_min_max(t_stack *stack)
 	stack_b_min_max(stack);
 }
 
-int	locate_min(t_stack *stack)
+int	locate_min(t_stack *stack, char char_id)
 {
 	int	position;
+	int min;
 	t_list *lst;
 
 	position = 0;
-	lst = *(stack->a);
-	while (lst && *((int *)lst->content) != stack->a_min)
+	if (char_id == 'a')
+	{
+		lst = *(stack->a);
+		min = stack->a_min;
+	}
+	else
+	{
+		lst = *(stack->b);
+		min = stack->b_min;
+	}
+	while (lst && *((int *)lst->content) != min)
+	{
+		position++;
+		lst = lst->next;
+	}
+	return (position);
+}
+
+int	locate_max(t_stack *stack, char char_id)
+{
+	int	position;
+	int max;
+	t_list *lst;
+
+	position = 1;
+	if (char_id == 'a')
+	{	
+		lst = *(stack->a);
+		max = stack->a_max;
+	}
+	else
+	{
+		lst = *(stack->b);
+		max = stack->b_max;
+	}
+	while (lst && *((int *)lst->content) != max)
 	{
 		position++;
 		lst = lst->next;

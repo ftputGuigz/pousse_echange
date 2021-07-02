@@ -39,7 +39,7 @@ void	printnumber(t_list *a, t_list *b)
 	}
 	a = tmpa;
 	b = tmpb;
-	sleep(1);
+	usleep(10000);
 }
 
 int	is_sorted(t_list *lst)
@@ -53,36 +53,54 @@ int	is_sorted(t_list *lst)
 	return (1);
 }
 
-void	inject_b_in_a(t_stack *stack)
+int	get_first_stack_elem(t_list *lst)
 {
-	t_list *lst;
-	int	last;
-	int	mvmt;
+	int content;
+
+	content = *(int *)(lst->content);
+	return (content);
+}
+
+int	locate_distance_to_placement(t_stack *stack)
+{
+	int d;
+	int	distance;
 	int first;
 	int second;
-	int d;
+	t_list *lst;
+
+	distance = 1;
+	d = get_first_stack_elem(*(stack->b));
+	if (d < stack->a_min)
+		return (locate_min(stack, 'a'));
+	if (d > stack->a_max)
+		return (locate_max(stack, 'a'));
+	lst = *(stack->a);
+	first = *((int *)lst->content);
+	second = *((int *)lst->next->content);
+	while ((!(d > first && d < second) && lst->next))
+	{
+		lst = lst->next;
+		first = *((int *)lst->content);
+		if (lst->next)
+			second = *((int *)(lst->next->content));
+		distance++;
+	}
+	printf("DISTANCE = %d\n", distance);
+	return (distance);
+}
+
+void	inject_b_in_a(t_stack *stack)
+{
+	int	mvmt;
 
 	mvmt = 0;
 	while (*(stack->b))
 	{
-		d = *(int *)((*(stack->b))->content);
-		last = *((int *)(ft_lstlast(*(stack->a))->content));
-		lst = *(stack->a);
-		first = *((int *)lst->content);
-		second = *((int *)lst->next->content);
-		while ((!(d > first && d < second) && (!(d < first && d > last)) && !(first == stack->a_min && d < first) && !(last == stack->a_max && d > last) && lst->next))
-		{
-			lst = lst->next;
-			first = *((int *)lst->content);
-			if (lst->next)
-				second = *((int *)(lst->next->content));
-			last = *((int *)(ft_lstlast(*(stack->a))->content));
-			mvmt++;
-		}
-		if (d > first && d < second)
-			mvmt++;
+		mvmt = locate_distance_to_placement(stack);
+		printf("MVMT = %d\n", mvmt);
+
 		int size = ft_lstsize(*(stack->a));
-		printf("size = %d\nmvmt = %d\n", size, mvmt);
 		if (mvmt <= size / 2)
 		{	
 			while (mvmt)
@@ -105,16 +123,12 @@ void	inject_b_in_a(t_stack *stack)
 	}
 }
 
-void	sort_3_to_5(t_stack *stack)
+void	order_list(t_stack *stack)
 {
 	int	position;
 	int	size;
 
-	while (ft_lstsize(*(stack->a)) != 3)
-		pb(stack);
-	sort_mini_list(stack, 'a');
-	inject_b_in_a(stack);
-	position = locate_min(stack);
+	position = locate_min(stack, 'a');
 	size = ft_lstsize(*(stack->a));
 	if (!position)
 		return ;
@@ -137,6 +151,15 @@ void	sort_3_to_5(t_stack *stack)
 	}
 }
 
+void	sort_3_to_5(t_stack *stack)
+{
+	while (ft_lstsize(*(stack->a)) != 3)
+		pb(stack);
+	sort_mini_list(stack, 'a');
+	inject_b_in_a(stack);
+	order_list(stack);
+}
+
 void	push_swap(t_stack *stack)
 {
 	int	size;
@@ -146,8 +169,11 @@ void	push_swap(t_stack *stack)
 		return ;
 	printnumber(*stack->a, *stack->b);
 	if (size <= 3)
+	{
 		sort_mini_list(stack, 'a');
-	else if (size > 3 && size <= 6)
+		order_list(stack);
+	}
+	else if (size > 3 && size <= 200)
 		sort_3_to_5(stack);
 	printf("MOVES = [%d]\n", moves);
 }
