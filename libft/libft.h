@@ -89,5 +89,8 @@ int					get_next_line(int fd, char **line);
 void				free_double(char **arr);
 void				clean_free(char **str);
 void				free_double_int(int **arr);
+void				ft_simplesort(int *tab, int size);
+int					ft_iseven(int n);
+int					ft_isodd(int n);
 
 #endif

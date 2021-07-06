@@ -6,7 +6,7 @@
 #    By: gpetit <gpetit@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 16:49:20 by gpetit            #+#    #+#              #
-#    Updated: 2021/06/24 14:22:31 by gpetit           ###   ########.fr        #
+#    Updated: 2021/07/06 10:37:09 by gpetit           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = ft_calloc.c ft_isascii.c ft_itoa.c ft_memmove.c ft_putendl_fd.c ft_split.
 	ft_strtrim.c ft_toupper.c ft_splits.c get_next_line.c ft_lstadd_back.c ft_lstadd_front.c \
 	ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 	ft_lstlast.c ft_lstnew.c ft_lstsize.c ft_lstmap.c ft_putstr.c ft_putchar.c free_double.c ft_lst_sort.c \
-	ft_realloc.c ft_putendl.c ft_putnbr.c ft_print_hexa.c ft_clean_free.c free_double_int.c
+	ft_realloc.c ft_putendl.c ft_putnbr.c ft_print_hexa.c ft_clean_free.c free_double_int.c ft_isodd.c ft_iseven.c ft_simplesort.c
+
 
 
 OBJS = $(SRCS:.c=.o)
