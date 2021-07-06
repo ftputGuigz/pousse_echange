@@ -61,5 +61,6 @@ void	stacks_min_max(t_stack *stack);
 void	sort_mini_list(t_stack *stack, char stack_id);
 int		locate_min(t_stack *stack, char stack_id);
 int		locate_max(t_stack *stack, char char_id);
+int		sort_big_list(t_stack *stack);
 
 #endif
