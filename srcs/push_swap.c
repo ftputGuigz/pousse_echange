@@ -39,7 +39,7 @@ void	printnumber(t_list *a, t_list *b)
 	}
 	a = tmpa;
 	b = tmpb;
-	usleep(10000);
+	usleep(1000);
 }
 
 int	is_sorted(t_list *lst)

@@ -94,6 +94,21 @@ int	max_distance_to_exit(t_stack *stack)
 	return (counter);
 }
 
+int	median_distance_to_exit(t_stack *stack)
+{
+	int		counter;
+	t_list	*lst;
+
+	counter = 0;
+	lst = *(stack->a);
+	while (lst && *((int *)lst->content) != stack->a_max)
+	{
+		counter++;
+		lst = lst->next;
+	}
+	return (counter);
+}
+
 int	min_distance_to_exit(t_stack *stack)
 {
 	int		counter;
@@ -172,6 +187,30 @@ void	pushback_to_a(t_stack *stack)
 	pushback_to_a(stack);
 }
 
+void	alignate_median(t_stack *stack)
+{
+	int moves;
+
+	moves = median_distance_to_exit(stack);
+	if (moves > ft_lstsize(*stack->a) / 2)
+	{
+		moves = ft_lstsize(*stack->a) - moves;
+		while (moves != 0)
+		{
+			rra(stack);
+			moves--;
+		}
+	}
+	else
+	{
+		while (moves != 0)
+		{
+			ra(stack);
+			moves--;
+		}
+	}
+}
+
 int	sort_big_list(t_stack *stack)
 {
 	int	*median;
@@ -182,6 +221,7 @@ int	sort_big_list(t_stack *stack)
 	under_median_goes_b(*median, stack);
 	pushback_to_a(stack);
 	higher_median_goes_b(*median, stack);
+	alignate_median(stack);
 	pushback_to_a(stack);
 	order_list(stack);
 	free(median);
