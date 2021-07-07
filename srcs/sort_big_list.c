@@ -12,16 +12,49 @@
 
 #include "push_swap.h"
 
+int *create_median_tab(int nb_elem, int *arr)
+{
+	int *median;
+	int i;
+	int	modulo;
+
+	i = 0;
+	modulo = nb_elem % 100;
+	if (nb_elem / 100 == 0)
+		median = malloc(sizeof(int));
+	else
+	{
+		if (modulo != 0)
+			modulo = 1;
+		median = malloc(sizeof(int) * (nb_elem / 100 + modulo - 1));
+	}
+	if (!median)
+		return (NULL);
+	if (nb_elem / 100 < 2)
+		*median = arr[nb_elem / 2];
+	else
+	{
+		while (i != nb_elem / 100 + modulo - 1)
+		{
+			median[i] = arr[100 * (i + 1)];
+			i++;
+		}
+	}
+	return (median);
+}
+
 int	*search_median(t_stack *stack)
 {
 	t_list	*lst;
+	int		size;
 	int		*arr;
 	int		*median;
 	int		i;
 
 	i = 0;
 	lst = *(stack->a);
-	arr = malloc(sizeof(int) * ft_lstsize(lst));
+	size = ft_lstsize(lst);
+	arr = malloc(sizeof(int) * size);
 	if (!arr)
 		return (NULL);
 	while (lst)
@@ -30,18 +63,17 @@ int	*search_median(t_stack *stack)
 		lst = lst->next;
 	}
 	ft_simplesort(arr, i);
-	median = malloc(sizeof(int));
+	median = create_median_tab(size, arr);
 	if (!median)
 	{
 		free(arr);
 		return (NULL);
 	}
-	*median = arr[ft_lstsize(*(stack->a)) / 2];
 	free(arr);
 	return (median);
 }
 
-void	under_median_goes_b(int median, t_stack *stack)
+void	first_under_median_goes_b(int oldmedian, int median, t_stack *stack)
 {
 	int		last_number;
 	t_list	*lst;
@@ -50,24 +82,39 @@ void	under_median_goes_b(int median, t_stack *stack)
 	last_number = *((int *)(ft_lstlast(lst)->content));
 	while (*((int *)lst->content) != last_number)
 	{
-		if (*((int *)lst->content) < median)
+		if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmedian)
 			pb(stack);
 		else
 			ra(stack);
 		lst = *(stack->a);
 	}
-	if (*((int *)lst->content) < median)
+	if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmedian)
+		pb(stack);
+}
+
+void	under_median_goes_b(int oldmedian, int median, t_stack *stack)
+{
+	t_list	*lst;
+
+	lst = *(stack->a);
+	while (*((int *)lst->content) != stack->a_min)
+	{
+		if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmedian)
+			pb(stack);
+		else
+			ra(stack);
+		lst = *(stack->a);
+	}
+	if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmedian)
 		pb(stack);
 }
 
 void	higher_median_goes_b(int median, t_stack *stack) //OPTIMISER !!!!! TROP DE CHEMINS
 {
-	int		last_number;
 	t_list	*lst;
 
 	lst = *(stack->a);
-	last_number = *((int *)(ft_lstlast(lst)->content));
-	while (*((int *)lst->content) != last_number)
+	while (*((int *)lst->content) != stack->a_min)
 	{
 		if (*((int *)lst->content) > median)
 			pb(stack);
@@ -94,14 +141,14 @@ int	max_distance_to_exit(t_stack *stack)
 	return (counter);
 }
 
-int	median_distance_to_exit(t_stack *stack)
+int	median_distance_to_exit(int median, t_stack *stack)
 {
 	int		counter;
 	t_list	*lst;
 
 	counter = 0;
 	lst = *(stack->a);
-	while (lst && *((int *)lst->content) != stack->a_max)
+	while (lst && *((int *)lst->content) != median)
 	{
 		counter++;
 		lst = lst->next;
@@ -181,17 +228,18 @@ void	pushback_to_a(t_stack *stack)
 		else
 			rotate_b_up(moves_min, stack);
 	}
-	if (!(*((int *)(*stack->b)->content) < *((int *)(*stack->a)->content)))
+	if (!(*((int *)(*(stack->b))->content) < *((int *)(*(stack->a))->content)))
 		ra(stack);
 	pa(stack);
 	pushback_to_a(stack);
 }
 
-void	alignate_median(t_stack *stack)
+void	alignate_median(int median, t_stack *stack)
 {
 	int moves;
 
-	moves = median_distance_to_exit(stack);
+	moves = median_distance_to_exit(median, stack);
+	printf("MOVES = %d\n", moves);
 	if (moves > ft_lstsize(*stack->a) / 2)
 	{
 		moves = ft_lstsize(*stack->a) - moves;
@@ -205,6 +253,7 @@ void	alignate_median(t_stack *stack)
 	{
 		while (moves != 0)
 		{
+			printf("Hello");
 			ra(stack);
 			moves--;
 		}
@@ -213,15 +262,41 @@ void	alignate_median(t_stack *stack)
 
 int	sort_big_list(t_stack *stack)
 {
+	int nb_elem;
+	int modulo;
 	int	*median;
-	
+	int	oldmedian;
+	int i;
+
+	i = 0;
+	nb_elem = ft_lstsize(*(stack->a));
+	modulo = nb_elem % 100;
+	if (modulo != 0)
+		modulo = 1;
+	oldmedian = stack->a_min;
 	median = search_median(stack);
 	if (!median)
 		return (0);
-	under_median_goes_b(*median, stack);
-	pushback_to_a(stack);
-	higher_median_goes_b(*median, stack);
-	alignate_median(stack);
+	int first = 0;
+	while (i != nb_elem / 100 + modulo - 1)
+	{
+		if (first == 0)
+		{	first = 1;
+			first_under_median_goes_b(oldmedian, median[i], stack);}
+		under_median_goes_b(oldmedian, median[i], stack);
+		alignate_median(oldmedian, stack);
+		pushback_to_a(stack);
+		oldmedian = median[i++];
+	}
+	if (i == 0)
+	{
+		first_under_median_goes_b(oldmedian, median[i], stack);
+		alignate_median(oldmedian, stack);
+		pushback_to_a(stack);
+		oldmedian = median[i++];
+	}
+	higher_median_goes_b(median[i - 1], stack);
+	alignate_median(oldmedian, stack);
 	pushback_to_a(stack);
 	order_list(stack);
 	free(median);

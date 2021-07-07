@@ -25,6 +25,8 @@ void	pa(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+
+	ft_putstr("pa\n");
 }
 
 void	pb(t_stack *stack)
@@ -40,6 +42,8 @@ void	pb(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+
+	ft_putstr("pb\n");
 }
 
 void	sa(t_stack *stack)
@@ -61,6 +65,9 @@ void	sa(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+
+		ft_putstr("sa\n");
+
 }
 
 void	sb(t_stack *stack)
@@ -82,6 +89,9 @@ void	sb(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+
+		ft_putstr("sb\n");
+
 }
 
 void	ss(t_stack *stack)

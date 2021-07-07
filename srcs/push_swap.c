@@ -14,6 +14,7 @@
 
 void	printnumber(t_list *a, t_list *b)
 {
+	return ;
 	t_list	*tmpa;
 	t_list	*tmpb;
 
@@ -178,5 +179,5 @@ void	push_swap(t_stack *stack)
 		sort_3_to_5(stack);
 	if (size > 6)
 		ret = sort_big_list(stack);
-	printf("MOVES = [%d]\n", moves);
+	//printf("MOVES = [%d]\n", moves);
 }

@@ -25,6 +25,8 @@ void	ra(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+
+	ft_putstr("ra\n");
 }
 
 void	rb(t_stack *stack)
@@ -40,6 +42,8 @@ void	rb(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+
+	ft_putstr("rb\n");
 }
 
 void	rr(t_stack *stack)
