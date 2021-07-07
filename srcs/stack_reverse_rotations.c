@@ -39,6 +39,7 @@ void	rra(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+	ft_putstr("rra\n");
 }
 
 void	rrb(t_stack *stack)
@@ -59,6 +60,7 @@ void	rrb(t_stack *stack)
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
+	ft_putstr("rrb\n");
 }
 
 void	rrr(t_stack *stack)
