@@ -31,6 +31,7 @@ typedef	struct s_stack
 	t_list **b;
 	int b_min;
 	int b_max;
+	t_list **output;
 }	t_stack;
 
 void	initialize_stack(t_stack *stack);

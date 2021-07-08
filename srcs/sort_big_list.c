@@ -19,24 +19,24 @@ int *create_median_tab(int nb_elem, int *arr)
 	int	modulo;
 
 	i = 0;
-	modulo = nb_elem % 100;
-	if (nb_elem / 100 == 0)
+	modulo = nb_elem % 60;
+	if (nb_elem / 60 == 0)
 		median = malloc(sizeof(int));
 	else
 	{
 		if (modulo != 0)
 			modulo = 1;
-		median = malloc(sizeof(int) * (nb_elem / 100 + modulo - 1));
+		median = malloc(sizeof(int) * (nb_elem / 60 + modulo - 1));
 	}
 	if (!median)
 		return (NULL);
-	if (nb_elem / 100 < 2)
+	if (nb_elem / 60 < 2)
 		*median = arr[nb_elem / 2];
 	else
 	{
-		while (i != nb_elem / 100 + modulo - 1)
+		while (i != nb_elem / 60 + modulo - 1)
 		{
-			median[i] = arr[100 * (i + 1)];
+			median[i] = arr[60 * (i + 1)];
 			i++;
 		}
 	}
@@ -239,7 +239,6 @@ void	alignate_median(int median, t_stack *stack)
 	int moves;
 
 	moves = median_distance_to_exit(median, stack);
-	printf("MOVES = %d\n", moves);
 	if (moves > ft_lstsize(*stack->a) / 2)
 	{
 		moves = ft_lstsize(*stack->a) - moves;
@@ -253,7 +252,6 @@ void	alignate_median(int median, t_stack *stack)
 	{
 		while (moves != 0)
 		{
-			printf("Hello");
 			ra(stack);
 			moves--;
 		}
@@ -270,7 +268,7 @@ int	sort_big_list(t_stack *stack)
 
 	i = 0;
 	nb_elem = ft_lstsize(*(stack->a));
-	modulo = nb_elem % 100;
+	modulo = nb_elem % 60;
 	if (modulo != 0)
 		modulo = 1;
 	oldmedian = stack->a_min;
@@ -278,7 +276,7 @@ int	sort_big_list(t_stack *stack)
 	if (!median)
 		return (0);
 	int first = 0;
-	while (i != nb_elem / 100 + modulo - 1)
+	while (i != nb_elem / 60 + modulo - 1)
 	{
 		if (first == 0)
 		{	first = 1;

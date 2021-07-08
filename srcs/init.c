@@ -20,6 +20,8 @@ void	initialize_stack(t_stack *stack)
 	stack->b_max = 0;
 	stack->a = (t_list **)malloc(sizeof(t_list *));
 	stack->b = (t_list **)malloc(sizeof(t_list *));
+	stack->output = (t_list **)malloc(sizeof(t_list *));
 	*(stack->a) = 0;
 	*(stack->b) = 0;
+	*(stack->output) = 0;
 }
