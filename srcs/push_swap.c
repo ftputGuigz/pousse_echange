@@ -159,6 +159,23 @@ void	sort_3_to_5(t_stack *stack)
 	order_list(stack);
 }
 
+void	parse_stack_output(t_stack *stack)
+{
+	t_list *lst;
+
+	lst = *(stack->output);
+	while (lst)
+	{
+		if (lst->next)
+		{
+			if ((ft_strcmp("sa", (char *)lst->content) && ft_strcmp("sb", (char *)lst->next->content)) || ((ft_strcmp("sb", (char *)lst->content) && ft_strcmp("sa", (char *)lst->next->content))))
+			else if ((ft_strcmp("ra", (char *)lst->content) && ft_strcmp("rb", (char *)lst->next->content)) || ((ft_strcmp("rb", (char *)lst->content) && ft_strcmp("ra", (char *)lst->next->content))))
+			else if ((ft_strcmp("rra", (char *)lst->content) && ft_strcmp("rrb", (char *)lst->next->content)) || ((ft_strcmp("rrb", (char *)lst->content) && ft_strcmp("rra", (char *)lst->next->content))))
+		}
+		lst = lst->next;
+	}
+}
+
 void	push_swap(t_stack *stack)
 {
 	int	size;
@@ -179,5 +196,14 @@ void	push_swap(t_stack *stack)
 		sort_3_to_5(stack);
 	if (size > 6)
 		ret = sort_big_list(stack);
+	parse_stack_output(stack);
+	t_list *lst;
+	lst = *(stack->output);
+	while (lst)
+	{
+		ft_putstr((char *)lst->content);
+		ft_putchar('\n');
+		lst = lst->next;
+	}
 	//printf("MOVES = [%d]\n", moves);
 }
