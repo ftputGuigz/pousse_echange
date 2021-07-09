@@ -170,10 +170,11 @@ void	push_swap(t_stack *stack)
 	printnumber(*stack->a, *stack->b);
 	if (size <= 3)
 	{
-		sort_mini_list(stack, 'a');
+		if (size == 3)
+			sort_mini_list(stack, 'a');
 		order_list(stack);
 	}
-	else if (size > 3 && size <= 200)
+	else if (size > 3 && size <= 6)
 		sort_3_to_5(stack);
 	printf("MOVES = [%d]\n", moves);
 }
