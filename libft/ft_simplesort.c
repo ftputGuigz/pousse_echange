@@ -27,9 +27,13 @@ void	ft_simplesort(int *tab, int size)
 			a = tab[j];
 			tab[j] = tab[i];
 			tab[i] = a;
-			ft_simplesort(tab, size);
+			i = 0;
+			j = 1;
 		}
-		i++;
-		j++;
+		else
+		{
+			i++;
+			j++;
+		}
 	}
 }
