@@ -32,10 +32,7 @@ int	search_doublon(int **buf, char *str)
 	while (buf[i])
 	{
 		if (*(buf[i]) == ft_atoi(str))
-		{
-			printf("DOUBLON = %ld\n", ft_atoi(str));
 			return (1);
-		}
 		i++;
 	}
 	return (0);
