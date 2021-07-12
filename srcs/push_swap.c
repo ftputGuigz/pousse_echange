@@ -202,7 +202,8 @@ void	push_swap(t_stack *stack)
 	printnumber(*stack->a, *stack->b);
 	if (size <= 3)
 	{
-		sort_mini_list(stack, 'a');
+		if (size == 3)
+			sort_mini_list(stack, 'a');
 		order_list(stack);
 	}
 	if (size > 3 && size <= 6)
