@@ -64,8 +64,10 @@ int	**create_buffer(int ac)
 int	register_datas(int ac, char **av, t_stack *stack)
 {
 	int		i;
+	int		j;
 	int		ret;
 	int		**buf;
+	char	**arr;
 
 	buf = create_buffer(ac);
 	if (!buf)
@@ -73,16 +75,23 @@ int	register_datas(int ac, char **av, t_stack *stack)
 	i = 1;
 	while (av[i])
 	{
-		if (!input_conformity(buf, av[i]))
-			ret = 0;
-		else
-			ret = register_element(&buf, av[i], stack);
-		if (!ret)
+		arr = ft_split(av[i], ' ');
+		j = 0;
+		while (arr[j])
 		{
-			free_double_int(buf);
-			ft_lstclear(stack->a, del);
-			return (0);
+			if (!input_conformity(buf, arr[j]))
+				ret = 0;
+			else
+				ret = register_element(&buf, arr[j], stack);
+			if (!ret)
+			{
+				free_double_int(buf);
+				ft_lstclear(stack->a, del);
+				return (0);
+			}
+			j++;
 		}
+		free_double(arr);
 		i++;
 	}
 	free_double_int(buf);
