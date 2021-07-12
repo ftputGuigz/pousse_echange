@@ -16,10 +16,13 @@ void	free_stack_ptr(t_stack *stack)
 {
 	ft_lstclear(stack->a, del);
 	ft_lstclear(stack->b, del);
+	ft_lstclear(stack->output, del);
 	if (stack->a)
 		free(stack->a);
 	if (stack->b)
 		free(stack->b);
+	if (stack->output)
+		free(stack->output);
 }
 
 void	del(void *content)

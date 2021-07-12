@@ -14,6 +14,7 @@
 
 void	printnumber(t_list *a, t_list *b)
 {
+	return ;
 	t_list	*tmpa;
 	t_list	*tmpb;
 
@@ -39,7 +40,7 @@ void	printnumber(t_list *a, t_list *b)
 	}
 	a = tmpa;
 	b = tmpb;
-	usleep(10000);
+	usleep(1000);
 }
 
 int	is_sorted(t_list *lst)
@@ -86,7 +87,6 @@ int	locate_distance_to_placement(t_stack *stack)
 			second = *((int *)(lst->next->content));
 		distance++;
 	}
-	printf("DISTANCE = %d\n", distance);
 	return (distance);
 }
 
@@ -98,7 +98,6 @@ void	inject_b_in_a(t_stack *stack)
 	while (*(stack->b))
 	{
 		mvmt = locate_distance_to_placement(stack);
-		printf("MVMT = %d\n", mvmt);
 
 		int size = ft_lstsize(*(stack->a));
 		if (mvmt <= size / 2)
@@ -160,10 +159,43 @@ void	sort_3_to_5(t_stack *stack)
 	order_list(stack);
 }
 
+void	print_stack_output(t_stack *stack)
+{
+	t_list *lst;
+
+	lst = *(stack->output);
+	while (lst)
+	{
+		if (lst->next && ((!ft_strcmp("sa", (char *)lst->content) && !ft_strcmp("sb", (char *)lst->next->content)) || (!ft_strcmp("sb", (char *)lst->content) && !ft_strcmp("sa", (char *)lst->next->content))))
+		{
+			ft_putstr("ss\n");
+			lst = lst->next->next;
+		}
+		else if (lst->next && ((!ft_strcmp("ra", (char *)lst->content) && !ft_strcmp("rb", (char *)lst->next->content)) || (!ft_strcmp("rb", (char *)lst->content) && !ft_strcmp("ra", (char *)lst->next->content))))
+		{	
+			ft_putstr("rr\n");
+			lst = lst->next->next;
+		}
+		else if (lst->next && ((!ft_strcmp("rra", (char *)lst->content) && !ft_strcmp("rrb", (char *)lst->next->content)) || (!ft_strcmp("rrb", (char *)lst->content) && !ft_strcmp("rra", (char *)lst->next->content))))
+		{
+			ft_putstr("rrr\n");	
+			lst = lst->next->next;
+		}
+		else
+		{
+			ft_putstr((char *)lst->content);
+			ft_putchar('\n');
+			lst = lst->next;
+		}
+	}
+}
+
 void	push_swap(t_stack *stack)
 {
 	int	size;
+	int	ret;
 
+	ret = 1;
 	size = ft_lstsize(*(stack->a));
 	if (is_sorted(*(stack->a)) || size == 1)
 		return ;
@@ -174,7 +206,10 @@ void	push_swap(t_stack *stack)
 			sort_mini_list(stack, 'a');
 		order_list(stack);
 	}
-	else if (size > 3 && size <= 6)
+	if (size > 3 && size <= 6)
 		sort_3_to_5(stack);
-	printf("MOVES = [%d]\n", moves);
+	if (size > 6)
+		ret = sort_big_list(stack);
+	print_stack_output(stack);
+	//printf("MOVES = [%d]\n", moves);
 }

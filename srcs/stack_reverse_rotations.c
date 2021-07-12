@@ -26,6 +26,8 @@ void	rra(t_stack *stack)
 	int		size;
 	t_list	*penultimate;
 	t_list	*last;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->a)))
 		return ;
@@ -36,6 +38,9 @@ void	rra(t_stack *stack)
 	penultimate = ft_lst_penultimate(*(stack->a));
 	penultimate->next = NULL;
 	ft_lstadd_front(stack->a, last);
+	content = ft_strdup("rra");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
@@ -46,6 +51,8 @@ void	rrb(t_stack *stack)
 	int		size;
 	t_list	*penultimate;
 	t_list	*last;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->b)))
 		return ;
@@ -56,6 +63,9 @@ void	rrb(t_stack *stack)
 	penultimate = ft_lst_penultimate(*(stack->b));
 	penultimate->next = NULL;
 	ft_lstadd_front(stack->b, last);
+	content = ft_strdup("rrb");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));

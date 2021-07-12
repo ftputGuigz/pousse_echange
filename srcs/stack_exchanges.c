@@ -15,6 +15,8 @@
 void	pa(t_stack *stack)
 {
 	t_list	*first;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->b)))
 		return ;
@@ -22,6 +24,9 @@ void	pa(t_stack *stack)
 	*(stack->b) = first->next;
 	ft_lstadd_front(stack->a, first);
 	stacks_min_max(stack);
+	content = ft_strdup("pa");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
@@ -30,6 +35,8 @@ void	pa(t_stack *stack)
 void	pb(t_stack *stack)
 {
 	t_list	*first;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->a)))
 		return ;
@@ -37,7 +44,10 @@ void	pb(t_stack *stack)
 	*(stack->a) = first->next;
 	ft_lstadd_front(stack->b, first);
 	stacks_min_max(stack);
-
+	content = ft_strdup("pb");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
+	
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
@@ -47,6 +57,8 @@ void	sa(t_stack *stack)
 	int		size;
 	t_list	*first;
 	t_list	*second;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->a)))
 		return ;
@@ -59,6 +71,9 @@ void	sa(t_stack *stack)
 	second->next = first;
 	*stack->a = second;
 
+	content = ft_strdup("sa");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
@@ -68,6 +83,8 @@ void	sb(t_stack *stack)
 	int		size;
 	t_list	*first;
 	t_list	*second;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->b)))
 		return ;
@@ -79,7 +96,9 @@ void	sb(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	*stack->b = second;
-
+	content = ft_strdup("sb");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }

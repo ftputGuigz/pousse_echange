@@ -15,6 +15,8 @@
 void	ra(t_stack *stack)
 {
 	t_list	*first;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->a)))
 		return ;
@@ -22,6 +24,9 @@ void	ra(t_stack *stack)
 	*(stack->a) = first->next;
 	first->next = 0;
 	ft_lstadd_back(stack->a, first);
+	content = ft_strdup("ra");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
@@ -30,6 +35,8 @@ void	ra(t_stack *stack)
 void	rb(t_stack *stack)
 {
 	t_list	*first;
+	t_list	*new_operation;
+	void	*content;
 
 	if (!(*(stack->b)))
 		return ;
@@ -37,6 +44,9 @@ void	rb(t_stack *stack)
 	*(stack->b) = first->next;
 	first->next = 0;
 	ft_lstadd_back(stack->b, first);
+	content = ft_strdup("rb");
+	new_operation = ft_lstnew(content);
+	ft_lstadd_back(stack->output, new_operation);
 
 	moves++;
 	printnumber(*(stack->a), *(stack->b));
