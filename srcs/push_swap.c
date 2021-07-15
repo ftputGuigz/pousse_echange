@@ -211,5 +211,4 @@ void	push_swap(t_stack *stack)
 	if (size > 6)
 		ret = sort_big_list(stack);
 	print_stack_output(stack);
-	//printf("MOVES = [%d]\n", moves);
 }

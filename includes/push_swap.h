@@ -21,8 +21,6 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-int	moves;
-
 typedef	struct s_stack
 {
 	t_list **a;

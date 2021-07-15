@@ -42,7 +42,6 @@ void	rra(t_stack *stack)
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
 
-	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -67,7 +66,6 @@ void	rrb(t_stack *stack)
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
 
-	moves++;
 	printnumber(*(stack->a), *(stack->b));
 }
 
@@ -75,5 +73,4 @@ void	rrr(t_stack *stack)
 {
 	rra(stack);
 	rrb(stack);
-	moves--;
 }

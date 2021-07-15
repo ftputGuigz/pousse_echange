@@ -94,13 +94,18 @@ void	first_under_median_goes_b(int oldmedian, int median, t_stack *stack)
 
 void	under_median_goes_b(int oldmedian, int median, t_stack *stack)
 {
+	int		count;
 	t_list	*lst;
 
+	count = 0;
 	lst = *(stack->a);
-	while (*((int *)lst->content) != stack->a_min)
+	while (*((int *)lst->content) != stack->a_min && count <= 60)
 	{
 		if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmedian)
+		{
+			count++;
 			pb(stack);
+		}
 		else
 			ra(stack);
 		lst = *(stack->a);
@@ -221,7 +226,7 @@ void	pushback_to_a(t_stack *stack)
 		else
 			rotate_b_up(moves_max, stack);
 	}
-	else if (moves_min < moves)
+	else if (moves_min < moves_max)
 	{
 		if (moves_min_backward)
 			rotate_b_down(moves_min, stack);
@@ -279,9 +284,12 @@ int	sort_big_list(t_stack *stack)
 	while (i != nb_elem / 60 + modulo - 1)
 	{
 		if (first == 0)
-		{	first = 1;
-			first_under_median_goes_b(oldmedian, median[i], stack);}
-		under_median_goes_b(oldmedian, median[i], stack);
+		{	
+			first = 1;
+			first_under_median_goes_b(oldmedian, median[i], stack);
+		}
+		else
+			under_median_goes_b(oldmedian, median[i], stack);
 		alignate_median(oldmedian, stack);
 		pushback_to_a(stack);
 		oldmedian = median[i++];
