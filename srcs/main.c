@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	initialize_stack(&stack);
-	ret = register_datas(ac, av, &stack);
+	ret = register_datas(av, &stack);
 	if (!ret)
 	{
 		ft_putstr_fd("Error\n", 2);

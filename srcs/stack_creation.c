@@ -12,25 +12,6 @@
 
 #include "push_swap.h"
 
-int	init_stack_a(int nb, t_stack *stack)
-{
-	t_list	*new_elem;
-	void	*content;
-
-	content = (int *)malloc(sizeof(int));
-	if (!content)
-		return (0);
-	*((int *)content) = nb;
-	new_elem = ft_lstnew(content);
-	if (!new_elem)
-	{
-		free(content);
-		return (0);
-	}
-	ft_lstadd_back(stack->a, new_elem);
-	return (1);
-}
-
 int	register_element(int ***buf, char *str, t_stack *stack)
 {
 	int	number;
@@ -43,24 +24,27 @@ int	register_element(int ***buf, char *str, t_stack *stack)
 	return (1);
 }
 
+void	count_malloc_elem(int *size, char *str)
+{
+	char	**temp;
+
+	temp = ft_split(str, ' ');
+	*(size) += ft_dbstrlen(temp);
+	free_double(temp);
+}
+
 int	**create_buffer(char **av)
 {
-	int 	**buf;
+	int		**buf;
 	int		i;
 	int		j;
 	int		size;
-	char	**temp;
 
 	i = 0;
 	j = 1;
 	size = 0;
 	while (av[j])
-	{
-		temp = ft_split(av[j], ' ');
-		size += ft_dbstrlen(temp);
-		free_double(temp);
-		j++;
-	}
+		count_malloc_elem(&size, av[j++]);
 	if (!size)
 		buf = NULL;
 	else
@@ -76,40 +60,48 @@ int	**create_buffer(char **av)
 	return (buf);
 }
 
-int	register_datas(int ac, char **av, t_stack *stack)
+int	register_input(char *elem, int ***buf, t_stack *stack)
 {
-	int		i;
 	int		j;
 	int		ret;
-	int		**buf;
 	char	**arr;
 
-	(void)ac;
+	arr = ft_split(elem, ' ');
+	j = 0;
+	while (arr[j])
+	{
+		if (!input_conformity(*buf, arr[j]))
+			ret = 0;
+		else
+			ret = register_element(buf, arr[j], stack);
+		if (!ret)
+		{
+			free_double(arr);
+			free_double_int(*buf);
+			ft_lstclear(stack->a, del);
+			return (0);
+		}
+		j++;
+	}
+	free_double(arr);
+	return (1);
+}
+
+int	register_datas(char **av, t_stack *stack)
+{
+	int		i;
+	int		**buf;
+	int		ret;
+
 	buf = create_buffer(av);
 	if (!buf)
 		return (0);
 	i = 1;
 	while (av[i])
-	{
-		arr = ft_split(av[i], ' ');
-		j = 0;
-		while (arr[j])
-		{
-			if (!input_conformity(buf, arr[j]))
-				ret = 0;
-			else
-				ret = register_element(&buf, arr[j], stack);
-			if (!ret)
-			{
-				free_double(arr);
-				free_double_int(buf);
-				ft_lstclear(stack->a, del);
-				return (0);
-			}
-			j++;
-		}
-		free_double(arr);
-		i++;
+	{	
+		ret = register_input(av[i++], &buf, stack);
+		if (!ret)
+			return (0);
 	}
 	free_double_int(buf);
 	stacks_min_max(stack);

@@ -33,7 +33,7 @@ typedef struct s_stack
 }	t_stack;
 
 void	initialize_stack(t_stack *stack);
-int		register_datas(int ac, char **av, t_stack *stack);
+int		register_datas(char **av, t_stack *stack);
 void	free_stack_ptr(t_stack *stack);
 void	del(void *content);
 int		add_to_buffer(int ***buf, char *str);
@@ -44,6 +44,7 @@ void	printnumber(t_list *a, t_list *b);
 void	print_stack_output(t_stack *stack);
 int		get_first_stack_elem(t_list *lst);
 void	sort_3_to_5(t_stack *stack);
+int		init_stack_a(int nb, t_stack *stack);
 
 //LIST MOVEMENTS
 void	sa(t_stack *stack);

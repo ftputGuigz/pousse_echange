@@ -64,7 +64,6 @@ void	sa(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	*stack->a = second;
-
 	content = ft_strdup("sa");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
