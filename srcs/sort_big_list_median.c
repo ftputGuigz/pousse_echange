@@ -17,7 +17,7 @@ int	*create_median_tab(int nb_elem, int *arr)
 	int	i;
 	int	modulo;
 
-	i = 0;
+	i = -1;
 	modulo = nb_elem % 60;
 	if (nb_elem / 60 == 0)
 		median = malloc(sizeof(int));
@@ -33,11 +33,8 @@ int	*create_median_tab(int nb_elem, int *arr)
 		*median = arr[nb_elem / 2];
 	else
 	{
-		while (i != nb_elem / 60 + modulo - 1)
-		{
+		while ((++i) != nb_elem / 60 + modulo - 1)
 			median[i] = arr[60 * (i + 1)];
-			i++;
-		}
 	}
 	return (median);
 }
@@ -63,11 +60,6 @@ int	*search_median(t_stack *stack)
 	}
 	ft_simplesort(arr, i);
 	median = create_median_tab(size, arr);
-	if (!median)
-	{
-		free(arr);
-		return (NULL);
-	}
 	free(arr);
 	return (median);
 }
