@@ -14,14 +14,15 @@
 
 t_list	*identify_lst(t_stack *stack, char stack_id)
 {
-	t_list *lst;
+	t_list	*lst;
 
 	if (stack_id == 'a')
 		lst = *(stack->a);
 	else
 		lst = *(stack->b);
-	return (lst);	
+	return (lst);
 }
+
 void	get_a_b_c(int *a, int *b, int *c, t_list *lst)
 {
 	*a = *((int *)(lst->content));
@@ -39,7 +40,7 @@ void	rotate_head(t_stack *stack, char stack_id)
 
 void	sort_mini_list(t_stack *stack, char stack_id)
 {
-	t_list *lst;
+	t_list	*lst;
 	int		a;
 	int		b;
 	int		c;
