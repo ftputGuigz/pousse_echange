@@ -14,9 +14,9 @@
 
 void	ft_simplesort(int *tab, int size)
 {
-	int i;
-	int j;
-	int a;
+	int	i;
+	int	j;
+	int	a;
 
 	i = 0;
 	j = 1;
