@@ -12,37 +12,6 @@
 
 #include "push_swap.h"
 
-void	printnumber(t_list *a, t_list *b)
-{
-	return ;
-	t_list	*tmpa;
-	t_list	*tmpb;
-
-	tmpa = a;
-	tmpb = b;
-	printf("\e[H\e[2J");
-	printf("%11c   %-11c\n", 'a', 'b');
-	while (a || b)
-	{
-		if (a)
-		{
-			printf("%11d | ", *((int *)a->content));
-			a = a->next;
-		}
-		else
-			printf("%11s | ", "");
-		if (b)
-		{
-			printf("%-11d", *((int *)b->content));
-			b = b->next;
-		}
-		printf("\n");
-	}
-	a = tmpa;
-	b = tmpb;
-	usleep(1000);
-}
-
 int	is_sorted(t_list *lst)
 {
 	while (lst->next)
@@ -199,7 +168,6 @@ void	push_swap(t_stack *stack)
 	size = ft_lstsize(*(stack->a));
 	if (is_sorted(*(stack->a)) || size == 1)
 		return ;
-	printnumber(*stack->a, *stack->b);
 	if (size <= 3)
 	{
 		if (size == 3)

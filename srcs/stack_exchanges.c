@@ -27,8 +27,6 @@ void	pa(t_stack *stack)
 	content = ft_strdup("pa");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
-
-	printnumber(*(stack->a), *(stack->b));
 }
 
 void	pb(t_stack *stack)
@@ -46,8 +44,6 @@ void	pb(t_stack *stack)
 	content = ft_strdup("pb");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
-	
-	printnumber(*(stack->a), *(stack->b));
 }
 
 void	sa(t_stack *stack)
@@ -72,8 +68,6 @@ void	sa(t_stack *stack)
 	content = ft_strdup("sa");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
-
-	printnumber(*(stack->a), *(stack->b));
 }
 
 void	sb(t_stack *stack)
@@ -97,8 +91,6 @@ void	sb(t_stack *stack)
 	content = ft_strdup("sb");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
-
-	printnumber(*(stack->a), *(stack->b));
 }
 
 void	ss(t_stack *stack)

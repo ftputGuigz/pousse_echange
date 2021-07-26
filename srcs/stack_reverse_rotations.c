@@ -41,8 +41,6 @@ void	rra(t_stack *stack)
 	content = ft_strdup("rra");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
-
-	printnumber(*(stack->a), *(stack->b));
 }
 
 void	rrb(t_stack *stack)
@@ -65,8 +63,6 @@ void	rrb(t_stack *stack)
 	content = ft_strdup("rrb");
 	new_operation = ft_lstnew(content);
 	ft_lstadd_back(stack->output, new_operation);
-
-	printnumber(*(stack->a), *(stack->b));
 }
 
 void	rrr(t_stack *stack)
