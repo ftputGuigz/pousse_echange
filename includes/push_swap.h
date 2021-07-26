@@ -21,15 +21,15 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-typedef	struct s_stack
+typedef struct s_stack
 {
-	t_list **a;
-	int a_min;
-	int a_max;
-	t_list **b;
-	int b_min;
-	int b_max;
-	t_list **output;
+	t_list	**a;
+	int		a_min;
+	int		a_max;
+	t_list	**b;
+	int		b_min;
+	int		b_max;
+	t_list	**output;
 }	t_stack;
 
 void	initialize_stack(t_stack *stack);
