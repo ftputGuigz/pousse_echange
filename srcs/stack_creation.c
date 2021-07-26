@@ -101,6 +101,7 @@ int	register_datas(int ac, char **av, t_stack *stack)
 				ret = register_element(&buf, arr[j], stack);
 			if (!ret)
 			{
+				free_double(arr);
 				free_double_int(buf);
 				ft_lstclear(stack->a, del);
 				return (0);
