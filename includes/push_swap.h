@@ -66,5 +66,14 @@ int		locate_min(t_stack *stack, char stack_id);
 int		locate_max(t_stack *stack, char char_id);
 int		sort_big_list(t_stack *stack);
 void	order_list(t_stack *stack);
+int		max_distance_to_exit(t_stack *stack);
+int		min_distance_to_exit(t_stack *stack);
+int		median_distance_to_exit(int median, t_stack *stack);
+void	rotate_b_down(int moves, t_stack *stack);
+void	rotate_b_up(int moves, t_stack *stack);
+int		*search_median(t_stack *stack);
+void	first_under_median_goes_b(int oldmedian, int median, t_stack *stack);
+void	under_median_goes_b(int oldmedian, int median, t_stack *stack);
+void	higher_median_goes_b(int median, t_stack *stack);
 
 #endif
