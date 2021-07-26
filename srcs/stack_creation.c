@@ -43,16 +43,31 @@ int	register_element(int ***buf, char *str, t_stack *stack)
 	return (1);
 }
 
-int	**create_buffer(int ac)
+int	**create_buffer(char **av)
 {
 	int 	**buf;
 	int		i;
+	int		j;
+	int		size;
+	char	**temp;
 
 	i = 0;
-	buf = (int **)malloc(sizeof(int *) * ac);
+	j = 1;
+	size = 0;
+	while (av[j])
+	{
+		temp = ft_split(av[j], ' ');
+		size += ft_dbstrlen(temp);
+		free_double(temp);
+		j++;
+	}
+	if (!size)
+		buf = NULL;
+	else
+		buf = (int **)malloc(sizeof(int *) * (size + 1));
 	if (buf)
 	{
-		while (i < ac)
+		while (i <= size)
 		{
 			buf[i] = NULL;
 			i++;
@@ -69,7 +84,8 @@ int	register_datas(int ac, char **av, t_stack *stack)
 	int		**buf;
 	char	**arr;
 
-	buf = create_buffer(ac);
+	(void)ac;
+	buf = create_buffer(av);
 	if (!buf)
 		return (0);
 	i = 1;
