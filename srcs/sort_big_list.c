@@ -43,7 +43,6 @@ int	sort_big_list(t_stack *stack)
 	int	*median;
 	int	oldmedian;
 	int	i;
-	int	first;
 
 	i = 0;
 	nb_elem = ft_lstsize(*(stack->a));
@@ -54,23 +53,16 @@ int	sort_big_list(t_stack *stack)
 	median = search_median(stack);
 	if (!median)
 		return (0);
-	first = 0;
+	first_under_median_goes_b(oldmedian, median[i], stack);
 	while (i != nb_elem / 60 + modulo - 1)
 	{
-		if (first == 0)
-		{	
-			first = 1;
-			first_under_median_goes_b(oldmedian, median[i], stack);
-		}
-		else
-			under_median_goes_b(oldmedian, median[i], stack);
+		under_median_goes_b(oldmedian, median[i], stack);
 		alignate_median(oldmedian, stack);
 		pushback_to_a(stack);
 		oldmedian = median[i++];
 	}
 	if (i == 0)
 	{
-		first_under_median_goes_b(oldmedian, median[i], stack);
 		alignate_median(oldmedian, stack);
 		pushback_to_a(stack);
 		oldmedian = median[i++];
