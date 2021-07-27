@@ -36,6 +36,26 @@ void	alignate_median(int median, t_stack *stack)
 	}
 }
 
+int	init_variables(int nb_elem, int *oldmedian, int **median, t_stack *stack)
+{
+	int	modulo;
+
+	modulo = nb_elem % 60;
+	if (modulo != 0)
+		modulo = 1;
+	*oldmedian = stack->a_min;
+	*median = search_median(stack);
+	return (modulo);
+}
+
+void	alignate_median_push_elem(int *olmed, int **med, int *i, t_stack *stack)
+{
+	alignate_median(*olmed, stack);
+	pushback_to_a(stack);
+	*olmed = (*med)[*i];
+	(*i)++;
+}
+
 int	sort_big_list(t_stack *stack)
 {
 	int	nb_elem;
@@ -46,26 +66,13 @@ int	sort_big_list(t_stack *stack)
 
 	i = 0;
 	nb_elem = ft_lstsize(*(stack->a));
-	modulo = nb_elem % 60;
-	if (modulo != 0)
-		modulo = 1;
-	oldmedian = stack->a_min;
-	median = search_median(stack);
+	modulo = init_variables(nb_elem, &oldmedian, &median, stack);
 	if (!median)
 		return (0);
-	first_under_median_goes_b(oldmedian, median[i], stack);
-	while (i != nb_elem / 60 + modulo - 1)
+	while (i == 0 || i != nb_elem / 60 + modulo - 1)
 	{
 		under_median_goes_b(oldmedian, median[i], stack);
-		alignate_median(oldmedian, stack);
-		pushback_to_a(stack);
-		oldmedian = median[i++];
-	}
-	if (i == 0)
-	{
-		alignate_median(oldmedian, stack);
-		pushback_to_a(stack);
-		oldmedian = median[i++];
+		alignate_median_push_elem(&oldmedian, &median, &i, stack);
 	}
 	higher_median_goes_b(median[i - 1], stack);
 	alignate_median(oldmedian, stack);

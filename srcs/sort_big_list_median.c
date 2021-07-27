@@ -64,41 +64,39 @@ int	*search_median(t_stack *stack)
 	return (median);
 }
 
-void	first_under_median_goes_b(int oldmedian, int median, t_stack *stack)
-{
-	int		last_number;
-	t_list	*lst;
-
-	lst = *(stack->a);
-	last_number = *((int *)(ft_lstlast(lst)->content));
-	while (*((int *)lst->content) != last_number)
-	{
-		if (*((int *)lst->content) <= median
-			&& *((int *)lst->content) > oldmedian)
-			pb(stack);
-		else
-			ra(stack);
-		lst = *(stack->a);
-	}
-	if (*((int *)lst->content) <= median
-		&& *((int *)lst->content) > oldmedian)
-		pb(stack);
-}
-
-void	under_median_goes_b(int oldmedian, int median, t_stack *stack)
+int	count_elem_needed(int oldmedian, int median, t_stack *stack)
 {
 	int		count;
 	t_list	*lst;
 
 	count = 0;
 	lst = *(stack->a);
-	while (*((int *)lst->content) != stack->a_min && count <= 60)
+	while (lst)
+	{
+		if (*((int *)lst->content) <= median
+			&& *((int *)lst->content) > oldmedian)
+			count++;
+		lst = lst->next;
+	}
+	return (count);
+}
+
+void	under_median_goes_b(int oldmedian, int median, t_stack *stack)
+{
+	int		count;
+	int		i;
+	t_list	*lst;
+
+	count = count_elem_needed(oldmedian, median, stack);
+	lst = *(stack->a);
+	i = 0;
+	while (i != count)
 	{
 		if (*((int *)lst->content) <= median
 			&& *((int *)lst->content) > oldmedian)
 		{
-			count++;
 			pb(stack);
+			i++;
 		}
 		else
 			ra(stack);
