@@ -75,5 +75,6 @@ int		*search_median(t_stack *stack);
 void	first_under_median_goes_b(int oldmedian, int median, t_stack *stack);
 void	under_median_goes_b(int oldmedian, int median, t_stack *stack);
 void	higher_median_goes_b(int median, t_stack *stack);
+void	pushback_to_a(t_stack *stack);
 
 #endif

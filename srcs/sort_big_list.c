@@ -12,51 +12,6 @@
 
 #include "push_swap.h"
 
-void	pushback_to_a(t_stack *stack)
-{
-	int	moves_max;
-	int	moves_max_backward;
-	int	moves_min;
-	int	moves_min_backward;
-	int	size;
-
-	if (!(*stack->b))
-		return ;
-	moves_max_backward = 0;
-	moves_min_backward = 0;
-	moves_max = max_distance_to_exit(stack);
-	moves_min = min_distance_to_exit(stack);
-	size = ft_lstsize(*(stack->b));
-	if (moves_max > size / 2)
-	{
-		moves_max_backward = 1;
-		moves_max = size - moves_max;
-	}
-	if (moves_min > size / 2)
-	{
-		moves_min_backward = 1;
-		moves_min = size - moves_min;
-	}
-	if (moves_max <= moves_min)
-	{
-		if (moves_max_backward)
-			rotate_b_down(moves_max, stack);
-		else
-			rotate_b_up(moves_max, stack);
-	}
-	else if (moves_min < moves_max)
-	{
-		if (moves_min_backward)
-			rotate_b_down(moves_min, stack);
-		else
-			rotate_b_up(moves_min, stack);
-	}
-	if (!(*((int *)(*(stack->b))->content) < *((int *)(*(stack->a))->content)))
-		ra(stack);
-	pa(stack);
-	pushback_to_a(stack);
-}
-
 void	alignate_median(int median, t_stack *stack)
 {
 	int	moves;
@@ -83,11 +38,11 @@ void	alignate_median(int median, t_stack *stack)
 
 int	sort_big_list(t_stack *stack)
 {
-	int nb_elem;
-	int modulo;
+	int	nb_elem;
+	int	modulo;
 	int	*median;
 	int	oldmedian;
-	int i;
+	int	i;
 	int	first;
 
 	i = 0;
