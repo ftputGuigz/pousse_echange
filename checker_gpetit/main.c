@@ -10,54 +10,95 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <sys/wait.h>
-#include "../libft/libft.h"
+#include "push_swap.h"
 
-
-
-t_list	**register_moves_from_stdin(void)
+char	*register_line()
 {
-	t_list	**solution;
 	char	*line;
+	char	buf[1];
+	int		size;
 	int		ret;
-	char	*content;
-	t_list	*new;
 
-	solution = (t_list **)malloc(sizeof(t_list *));
-	if (!solution)
-		return (NULL);
-	ret = get_next_line(STDIN_FILENO, &line);
-	content = ft_strdup(line);
-	new = ft_lstnew((void *)content);
-	ft_lstadd_back(solution, new);
+	size = 0;
+	line = NULL;
+	ret = read(STDIN_FILENO, buf, 1);
 	while (ret)
 	{
-		ret = get_next_line(STDIN_FILENO, &line);
-		content = ft_strdup(line);
-		new = ft_lstnew((void *)content);
-		ft_lstadd_back(solution, new);
+		line = ft_realloc(line, size + 2);
+		line[size + 1] = '\0';
+		line[size++] = buf[0];
+		if (buf[0] == '\n')
+			break ;
+		read(STDIN_FILENO, buf, 1);
 	}
-	return (solution);
+	return (line);
 }
 
-int	check_pushswap_output(void)
+void	applicate_move_to_stack(char *line, t_stack *stack)
 {
-	t_list **solution;
+	if (!ft_strcmp(line, "sa\n"))
+		sa(stack);
+	else if (!ft_strcmp(line, "sb\n"))
+		sb(stack);
+	else if (!ft_strcmp(line, "ss\n"))
+		ss(stack);
+	else if (!ft_strcmp(line, "pa\n"))
+		pa(stack);
+	else if (!ft_strcmp(line, "pb\n"))
+		pb(stack);
+	else if (!ft_strcmp(line, "ra\n"))
+		ra(stack);
+	else if (!ft_strcmp(line, "rb\n"))
+		rb(stack);
+	else if (!ft_strcmp(line, "rr\n"))
+		rr(stack);
+	else if (!ft_strcmp(line, "rra\n"))
+		rra(stack);
+	else if (!ft_strcmp(line, "rrb\n"))
+		rrb(stack);
+	else if (!ft_strcmp(line, "rrr\n"))
+		rrr(stack);
+	else
+		ft_putstr_fd("Error\n", 2);
+}
 
-	solution = register_moves_from_stdin();
-	return (0);
+void	execute_moves(t_stack *stack)
+{
+	char	*line;
+
+	line = register_line();
+	while (ft_strcmp(line, "\n"))
+	{
+		applicate_move_to_stack(line, stack);
+		clean_free(&line);
+		line = register_line();
+	}
+	clean_free(&line);
 }
 
 int	main(int ac, char **av)
 {
-	pid_t	pid;
+	int		ret;
+	t_stack	stack;
 
-	(void)ac;
-	pid = fork();
-	if (pid == 0)
-		execve("../push_swap", av + 1, NULL);
-	waitpid(pid, 0, 0);
-	check_pushswap_output();
+	if (ac == 1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	initialize_stack(&stack);
+	ret = register_datas(av, &stack);
+	if (!ret)
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack_ptr(&stack);
+		return (0);
+	}
+	execute_moves(&stack);
+	if (is_sorted(*(stack.a)))
+		ft_putstr_fd("OK\n", STDOUT_FILENO);
+	else
+		ft_putstr_fd("KO\n", STDOUT_FILENO);
+	free_stack_ptr(&stack);
 	return (0);
 }
