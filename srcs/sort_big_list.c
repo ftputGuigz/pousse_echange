@@ -69,7 +69,7 @@ int	sort_big_list(t_stack *stack)
 	modulo = init_variables(nb_elem, &oldmedian, &median, stack);
 	if (!median)
 		return (0);
-	while (i == 0 || i != nb_elem / 60 + modulo - 1)
+	while (i == 0 || i < nb_elem / 60 + modulo - 1)
 	{
 		under_median_goes_b(oldmedian, median[i], stack);
 		alignate_median_push_elem(&oldmedian, &median, &i, stack);
