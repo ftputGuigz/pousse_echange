@@ -70,14 +70,7 @@ void	execute_moves(t_stack *stack)
 	line = register_line();
 	if (!line)
 		return ;
-	int i = 0;
-	while (line[i])
-	{	ft_putstr("====>");
-		printf("ADDR = [%p]\n", line + i);
-		ft_putstr("<====\n");
-		i++;}
-	
-	while (ft_strcmp(line, "\n"))
+	while (line && ft_strcmp(line, "\n"))
 	{
 		applicate_move_to_stack(line, stack);
 		clean_free(&line);
