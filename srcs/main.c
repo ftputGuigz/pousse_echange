@@ -30,7 +30,9 @@ int	main(int ac, char **av)
 		free_stack_ptr(&stack);
 		return (0);
 	}
-	push_swap(&stack);
+	ret = push_swap(&stack);
+	if (!ret)
+		ft_putstr_fd("Error\n", 2);
 	free_stack_ptr(&stack);
 	return (0);
 }

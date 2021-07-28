@@ -12,38 +12,54 @@
 
 #include "push_swap.h"
 
-void	ra(t_stack *stack)
+int	ra(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*new_operation;
 	void	*content;
 
 	if (!(*(stack->a)))
-		return ;
+		return (0);
 	first = *(stack->a);
 	*(stack->a) = first->next;
 	first->next = 0;
 	ft_lstadd_back(stack->a, first);
 	content = ft_strdup("ra");
+	if (!content)
+		return (0);
 	new_operation = ft_lstnew(content);
+	if (!new_operation)
+	{
+		free(content);
+		return (0);
+	}
 	ft_lstadd_back(stack->output, new_operation);
+	return (1);
 }
 
-void	rb(t_stack *stack)
+int	rb(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*new_operation;
 	void	*content;
 
 	if (!(*(stack->b)))
-		return ;
+		return (0);
 	first = *(stack->b);
 	*(stack->b) = first->next;
 	first->next = 0;
 	ft_lstadd_back(stack->b, first);
 	content = ft_strdup("rb");
+	if (!content)
+		return (0);
 	new_operation = ft_lstnew(content);
+	if (!new_operation)
+	{
+		free(content);
+		return (0);
+	}
 	ft_lstadd_back(stack->output, new_operation);
+	return (1);
 }
 
 void	rr(t_stack *stack)

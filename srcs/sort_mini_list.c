@@ -30,15 +30,18 @@ void	get_a_b_c(int *a, int *b, int *c, t_list *lst)
 	*c = *((int *)(lst->next->next->content));
 }
 
-void	rotate_head(t_stack *stack, char stack_id)
+int	rotate_head(t_stack *stack, char stack_id)
 {
+	int ret;
+
 	if (stack_id == 'a')
-		sa(stack);
+		ret = sa(stack);
 	else
-		sb(stack);
+		ret = sb(stack);
+	return (ret);
 }
 
-void	sort_mini_list(t_stack *stack, char stack_id)
+int	sort_mini_list(t_stack *stack, char stack_id)
 {
 	t_list	*lst;
 	int		a;
@@ -49,5 +52,6 @@ void	sort_mini_list(t_stack *stack, char stack_id)
 	get_a_b_c(&a, &b, &c, lst);
 	if (!((a < b && b < c) || (a > b && b < c && a > c) || \
 	(a < b && b > c && a > c)))
-		rotate_head(stack, stack_id);
+		return (rotate_head(stack, stack_id));
+	return (1);
 }

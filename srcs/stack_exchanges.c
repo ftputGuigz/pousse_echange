@@ -12,41 +12,57 @@
 
 #include "push_swap.h"
 
-void	pa(t_stack *stack)
+int	pa(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*new_operation;
 	void	*content;
 
 	if (!(*(stack->b)))
-		return ;
+		return (0);
 	first = *(stack->b);
 	*(stack->b) = first->next;
 	ft_lstadd_front(stack->a, first);
 	stacks_min_max(stack);
 	content = ft_strdup("pa");
+	if (!content)
+		return (0);
 	new_operation = ft_lstnew(content);
+	if (!new_operation)
+	{
+		free(content);
+		return (0);
+	}
 	ft_lstadd_back(stack->output, new_operation);
+	return (1);
 }
 
-void	pb(t_stack *stack)
+int	pb(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*new_operation;
 	void	*content;
 
 	if (!(*(stack->a)))
-		return ;
+		return (0);
 	first = *(stack->a);
 	*(stack->a) = first->next;
 	ft_lstadd_front(stack->b, first);
 	stacks_min_max(stack);
 	content = ft_strdup("pb");
+	if (!content)
+		return (0);
 	new_operation = ft_lstnew(content);
+	if (!new_operation)
+	{
+		free(content);
+		return (0);
+	}
 	ft_lstadd_back(stack->output, new_operation);
+	return (1);
 }
 
-void	sa(t_stack *stack)
+int	sa(t_stack *stack)
 {
 	int		size;
 	t_list	*first;
@@ -55,21 +71,29 @@ void	sa(t_stack *stack)
 	void	*content;
 
 	if (!(*(stack->a)))
-		return ;
+		return (0);
 	size = ft_lstsize(*(stack->a));
 	if (size == 1)
-		return ;
+		return (1);
 	first = *(stack->a);
 	second = first->next;
 	first->next = second->next;
 	second->next = first;
 	*stack->a = second;
 	content = ft_strdup("sa");
+	if (!content)
+		return (0);
 	new_operation = ft_lstnew(content);
+	if (!new_operation)
+	{
+		free(content);
+		return (0);
+	}
 	ft_lstadd_back(stack->output, new_operation);
+	return (1);
 }
 
-void	sb(t_stack *stack)
+int	sb(t_stack *stack)
 {
 	int		size;
 	t_list	*first;
@@ -78,18 +102,26 @@ void	sb(t_stack *stack)
 	void	*content;
 
 	if (!(*(stack->b)))
-		return ;
+		return (0);
 	size = ft_lstsize(*(stack->b));
 	if (size == 1)
-		return ;
+		return (1);
 	first = *(stack->b);
 	second = first->next;
 	first->next = second->next;
 	second->next = first;
 	*stack->b = second;
 	content = ft_strdup("sb");
+	if (!content)
+		return (0);
 	new_operation = ft_lstnew(content);
+	if (!new_operation)
+	{
+		free(content);
+		return (0);
+	}
 	ft_lstadd_back(stack->output, new_operation);
+	return (1);
 }
 
 void	ss(t_stack *stack)

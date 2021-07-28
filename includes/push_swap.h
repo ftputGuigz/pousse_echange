@@ -38,7 +38,7 @@ void	free_stack_ptr(t_stack *stack);
 void	del(void *content);
 int		add_to_buffer(int ***buf, char *str);
 int		input_conformity(int **buf, char *str);
-void	push_swap(t_stack *stack);
+int		push_swap(t_stack *stack);
 int		is_sorted(t_list *lst);
 void	printnumber(t_list *a, t_list *b);
 void	print_stack_output(t_stack *stack);
@@ -47,21 +47,21 @@ void	sort_3_to_5(t_stack *stack);
 int		init_stack_a(int nb, t_stack *stack);
 
 //LIST MOVEMENTS
-void	sa(t_stack *stack);
-void	sb(t_stack *stack);
+int		sa(t_stack *stack);
+int		sb(t_stack *stack);
 void	ss(t_stack *stack);
-void	pa(t_stack *stack);
-void	pb(t_stack *stack);
-void	ra(t_stack *stack);
-void	rb(t_stack *stack);
+int		pa(t_stack *stack);
+int		pb(t_stack *stack);
+int		ra(t_stack *stack);
+int		rb(t_stack *stack);
 void	rr(t_stack *stack);
-void	rra(t_stack *stack);
-void	rrb(t_stack *stack);
+int		rra(t_stack *stack);
+int		rrb(t_stack *stack);
 void	rrr(t_stack *stack);
 
 //SORTING ALGO
 void	stacks_min_max(t_stack *stack);
-void	sort_mini_list(t_stack *stack, char stack_id);
+int		sort_mini_list(t_stack *stack, char stack_id);
 int		locate_min(t_stack *stack, char stack_id);
 int		locate_max(t_stack *stack, char char_id);
 int		sort_big_list(t_stack *stack);
