@@ -84,9 +84,7 @@ int	order_list(t_stack *stack)
 
 	position = locate_min(stack, 'a');
 	size = ft_lstsize(*(stack->a));
-	if (!position)
-		return (1);
-	if (position <= size / 2)
+	if (position && position <= size / 2)
 	{
 		while (position)
 		{
@@ -95,7 +93,7 @@ int	order_list(t_stack *stack)
 			position--;
 		}
 	}
-	if (position > size / 2)
+	else if (position && position > size / 2)
 	{
 		position = size - position;
 		while (position)
