@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-char	*register_line()
+char	*register_line(void)
 {
 	char	*line;
 	char	buf[1];
@@ -25,6 +25,8 @@ char	*register_line()
 	while (ret)
 	{
 		line = ft_realloc(line, size + 2);
+		if (!line)
+			return (line);
 		line[size] = buf[0];
 		line[size + 1] = '\0';
 		size++;
@@ -32,56 +34,72 @@ char	*register_line()
 			break ;
 		ret = read(STDIN_FILENO, buf, 1);
 	}
+	if (ret == -1)
+		clean_free(&line);
 	return (line);
 }
 
-void	applicate_move_to_stack(char *line, t_stack *stack)
+int	applicate_move_to_stack(char *line, t_stack *stack)
 {
 	if (!ft_strcmp(line, "sa\n"))
-		sa(stack);
+		return (sa(stack));
 	else if (!ft_strcmp(line, "sb\n"))
-		sb(stack);
+		return (sb(stack));
 	else if (!ft_strcmp(line, "ss\n"))
-		ss(stack);
+		return (ss(stack));
 	else if (!ft_strcmp(line, "pa\n"))
-		pa(stack);
+		return (pa(stack));
 	else if (!ft_strcmp(line, "pb\n"))
-		pb(stack);
+		return (pb(stack));
 	else if (!ft_strcmp(line, "ra\n"))
-		ra(stack);
+		return (ra(stack));
 	else if (!ft_strcmp(line, "rb\n"))
-		rb(stack);
+		return (rb(stack));
 	else if (!ft_strcmp(line, "rr\n"))
-		rr(stack);
+		return (rr(stack));
 	else if (!ft_strcmp(line, "rra\n"))
-		rra(stack);
+		return (rra(stack));
 	else if (!ft_strcmp(line, "rrb\n"))
-		rrb(stack);
+		return (rrb(stack));
 	else if (!ft_strcmp(line, "rrr\n"))
-		rrr(stack);
+		return (rrr(stack));
 	else
 		ft_putstr_fd("Error\n", 2);
+	return (1);
 }
 
-void	execute_moves(t_stack *stack)
+int	execute_moves(t_stack *stack)
 {
+	int		ret;
 	char	*line;
 
 	line = register_line();
 	if (!line)
-		return ;
+		return (0);
 	while (line && ft_strcmp(line, "\n"))
 	{
-		applicate_move_to_stack(line, stack);
+		ret = applicate_move_to_stack(line, stack);
 		clean_free(&line);
+		if (!ret)
+			return (0);
 		line = register_line();
+		if (!line)
+			return (0);
 	}
 	clean_free(&line);
+	return (1);
+}
+
+void	check_if_pile_a_sorted(t_list *pile_a)
+{
+	if (is_sorted(pile_a))
+		ft_putstr_fd("OK\n", STDOUT_FILENO);
+	else
+		ft_putstr_fd("KO\n", STDOUT_FILENO);
 }
 
 int	main(int ac, char **av)
 {
-	int		ret;
 	t_stack	stack;
 
 	if (ac == 1)
@@ -89,19 +107,19 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
-	initialize_stack(&stack);
-	ret = register_datas(av, &stack);
-	if (!ret)
+	if (!initialize_stack(&stack) || !register_datas(av, &stack))
 	{
 		ft_putstr_fd("Error\n", 2);
 		free_stack_ptr(&stack);
 		return (0);
 	}
-	execute_moves(&stack);
-	if (is_sorted(*(stack.a)))
-		ft_putstr_fd("OK\n", STDOUT_FILENO);
-	else
-		ft_putstr_fd("KO\n", STDOUT_FILENO);
+	if (!execute_moves(&stack))
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack_ptr(&stack);
+		return (0);
+	}
+	check_if_pile_a_sorted(*(stack.a));
 	free_stack_ptr(&stack);
 	return (0);
 }
