@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	initialize_stack(t_stack *stack)
+int	initialize_stack(t_stack *stack)
 {
 	stack->a_min = 0;
 	stack->a_max = 0;
@@ -21,9 +21,20 @@ void	initialize_stack(t_stack *stack)
 	stack->a = (t_list **)malloc(sizeof(t_list *));
 	stack->b = (t_list **)malloc(sizeof(t_list *));
 	stack->output = (t_list **)malloc(sizeof(t_list *));
+	if (!(stack->a) || !(stack->b) || !(stack->output))
+	{
+		if (stack->a)
+			free(stack->a);
+		if (stack->b)
+			free(stack->b);
+		if (stack->output)
+			free(stack->output);
+		return (0);
+	}
 	*(stack->a) = 0;
 	*(stack->b) = 0;
 	*(stack->output) = 0;
+	return (1);
 }
 
 int	init_stack_a(int nb, t_stack *stack)
