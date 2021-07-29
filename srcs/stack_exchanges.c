@@ -124,8 +124,11 @@ int	sb(t_stack *stack)
 	return (1);
 }
 
-void	ss(t_stack *stack)
+int	ss(t_stack *stack)
 {
-	sa(stack);
-	sb(stack);
+	if (!sa(stack))
+		return (0);
+	if (!sb(stack))
+		return (0);
+	return (1);
 }
