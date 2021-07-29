@@ -77,7 +77,7 @@ void	inject_b_in_a(t_stack *stack)
 	}
 }
 
-void	order_list(t_stack *stack)
+int	order_list(t_stack *stack)
 {
 	int	position;
 	int	size;
@@ -85,12 +85,13 @@ void	order_list(t_stack *stack)
 	position = locate_min(stack, 'a');
 	size = ft_lstsize(*(stack->a));
 	if (!position)
-		return ;
+		return (1);
 	if (position <= size / 2)
 	{
 		while (position)
 		{
-			ra(stack);
+			if (!ra(stack))
+				return (0);
 			position--;
 		}
 	}
@@ -99,10 +100,12 @@ void	order_list(t_stack *stack)
 		position = size - position;
 		while (position)
 		{
-			rra(stack);
+			if (!rra(stack))
+				return (0);
 			position--;
 		}
 	}
+	return (1);
 }
 
 void	sort_3_to_5(t_stack *stack)

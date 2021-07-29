@@ -35,15 +35,22 @@ int	set_flag_recalculate_moves(int *flag, int size, int moves)
 	return (moves);
 }
 
-static void	move_max_or_min(int flag, int moves, t_stack *stack)
+static int	move_max_or_min(int flag, int moves, t_stack *stack)
 {
 	if (flag)
-		rotate_b_down(moves, stack);
+	{
+		if (!rotate_b_down(moves, stack))
+			return (0);
+	}
 	else
-		rotate_b_up(moves, stack);
+	{	
+		if (!rotate_b_up(moves, stack))
+			return (0);
+	}
+	return (1);
 }
 
-void	pushback_to_a(t_stack *stack)
+int	pushback_to_a(t_stack *stack)
 {
 	int	moves_max;
 	int	max_backward;
@@ -52,7 +59,7 @@ void	pushback_to_a(t_stack *stack)
 	int	size;
 
 	if (!(*stack->b))
-		return ;
+		return (1);
 	init_pushback_flags(&max_backward, &min_backward);
 	size = init_size_and_moves(&moves_max, &moves_min, stack);
 	if (moves_max > size / 2)
@@ -60,11 +67,19 @@ void	pushback_to_a(t_stack *stack)
 	if (moves_min > size / 2)
 		moves_min = set_flag_recalculate_moves(&min_backward, size, moves_min);
 	if (moves_max <= moves_min)
-		move_max_or_min(max_backward, moves_max, stack);
+	{
+		if (!move_max_or_min(max_backward, moves_max, stack))
+			return (0);
+	}
 	else if (moves_min < moves_max)
-		move_max_or_min(min_backward, moves_min, stack);
+	{
+		if (!move_max_or_min(min_backward, moves_min, stack))
+			return (0);
+	}
 	if (!(*((int *)(*(stack->b))->content) < *((int *)(*(stack->a))->content)))
-		ra(stack);
-	pa(stack);
-	pushback_to_a(stack);
+		if (!ra(stack))
+			return (0);
+	if (!pa(stack))
+		return (0);
+	return (pushback_to_a(stack));
 }
