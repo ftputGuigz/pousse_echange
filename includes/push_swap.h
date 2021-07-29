@@ -43,7 +43,7 @@ int		is_sorted(t_list *lst);
 void	printnumber(t_list *a, t_list *b);
 void	print_stack_output(t_stack *stack);
 int		get_first_stack_elem(t_list *lst);
-void	sort_3_to_5(t_stack *stack);
+int		sort_3_to_5(t_stack *stack);
 int		init_stack_a(int nb, t_stack *stack);
 
 //LIST MOVEMENTS

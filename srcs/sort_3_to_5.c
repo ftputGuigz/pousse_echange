@@ -40,13 +40,14 @@ int	locate_distance_to_placement(t_stack *stack)
 	return (distance);
 }
 
-void	inject_b_in_a_2(int *mvmt, int size, t_stack *stack)
+int	inject_b_in_a_2(int *mvmt, int size, t_stack *stack)
 {
 	if (*mvmt <= size / 2)
 	{	
 		while (*mvmt)
 		{
-			ra(stack);
+			if (!ra(stack))
+				return (0);
 			(*mvmt)--;
 		}
 	}
@@ -55,13 +56,15 @@ void	inject_b_in_a_2(int *mvmt, int size, t_stack *stack)
 		*mvmt = size - *mvmt;
 		while (*mvmt)
 		{
-			rra(stack);
+			if (!rra(stack))
+				return (0);
 			(*mvmt)--;
 		}
 	}
+	return (1);
 }
 
-void	inject_b_in_a(t_stack *stack)
+int	inject_b_in_a(t_stack *stack)
 {
 	int	mvmt;
 	int	size;
@@ -71,10 +74,13 @@ void	inject_b_in_a(t_stack *stack)
 	{
 		mvmt = locate_distance_to_placement(stack);
 		size = ft_lstsize(*(stack->a));
-		inject_b_in_a_2(&mvmt, size, stack);
+		if (!inject_b_in_a_2(&mvmt, size, stack))
+			return (0);
 		if (*(stack->b))
-			pa(stack);
+			if (!pa(stack))
+				return (0);
 	}
+	return (1);
 }
 
 int	order_list(t_stack *stack)
@@ -106,11 +112,16 @@ int	order_list(t_stack *stack)
 	return (1);
 }
 
-void	sort_3_to_5(t_stack *stack)
+int	sort_3_to_5(t_stack *stack)
 {
 	while (ft_lstsize(*(stack->a)) != 3)
-		pb(stack);
-	sort_mini_list(stack, 'a');
-	inject_b_in_a(stack);
-	order_list(stack);
+		if (!pb(stack))
+			return (0);
+	if (!sort_mini_list(stack, 'a'))
+		return (0);
+	if (!inject_b_in_a(stack))
+		return (0);
+	if (!order_list(stack))
+		return (0);
+	return (1);
 }

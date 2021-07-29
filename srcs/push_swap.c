@@ -28,9 +28,11 @@ int	push_swap(t_stack *stack)
 		order_list(stack);
 	}
 	if (size > 3 && size <= 6)
-		sort_3_to_5(stack);
+		ret = sort_3_to_5(stack);
 	if (size > 6)
 		ret = sort_big_list(stack);
+	if (!ret)
+		return (0);
 	print_stack_output(stack);
-	return (ret);
+	return (1);
 }
