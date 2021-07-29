@@ -57,20 +57,24 @@ int	min_distance_to_exit(t_stack *stack)
 	return (counter);
 }
 
-void	rotate_b_down(int moves, t_stack *stack)
+int	rotate_b_down(int moves, t_stack *stack)
 {
 	while (moves != 0)
 	{
 		moves--;
-		rrb(stack);
+		if (!rrb(stack))
+			return (0);
 	}
+	return (1);
 }
 
-void	rotate_b_up(int moves, t_stack *stack)
+int	rotate_b_up(int moves, t_stack *stack)
 {
 	while (moves != 0)
 	{
 		moves--;
-		rb(stack);
+		if (!rb(stack))
+			return (0);
 	}
+	return (1);
 }

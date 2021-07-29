@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	alignate_median(int median, t_stack *stack)
+int	alignate_median(int median, t_stack *stack)
 {
 	int	moves;
 
@@ -22,7 +22,8 @@ void	alignate_median(int median, t_stack *stack)
 		moves = ft_lstsize(*stack->a) - moves;
 		while (moves != 0)
 		{
-			rra(stack);
+			if (!rra(stack))
+				return (0);
 			moves--;
 		}
 	}
@@ -30,10 +31,12 @@ void	alignate_median(int median, t_stack *stack)
 	{
 		while (moves != 0)
 		{
-			ra(stack);
+			if (!ra(stack))
+				return (0);
 			moves--;
 		}
 	}
+	return (1);
 }
 
 int	init_variables(int nb_elem, int *oldmedian, int **median, t_stack *stack)
@@ -48,12 +51,37 @@ int	init_variables(int nb_elem, int *oldmedian, int **median, t_stack *stack)
 	return (modulo);
 }
 
-void	alignate_median_push_elem(int *olmed, int **med, int *i, t_stack *stack)
+int	alignate_median_push_elem(int *olmed, int **med, int *i, t_stack *stack)
 {
-	alignate_median(*olmed, stack);
-	pushback_to_a(stack);
+	if (!alignate_median(*olmed, stack))
+		return (0);
+	if (!pushback_to_a(stack))
+		return (0);
 	*olmed = (*med)[*i];
 	(*i)++;
+	return (1);
+}
+
+int	loop_median(int *oldmedian, int **median, int *i, t_stack *stack)
+{
+	if (!under_median_goes_b(*oldmedian, (*median)[*i], stack))
+		return (0);
+	if (!alignate_median_push_elem(oldmedian, median, i, stack))
+		return (0);
+	return (1);
+}
+
+int	last_median(int	oldmedian, int last_median, t_stack *stack)
+{
+	if (!higher_median_goes_b(last_median, stack))
+		return (0);
+	if (!alignate_median(oldmedian, stack))
+		return (0);
+	if (!pushback_to_a(stack))
+		return (0);
+	if (!order_list(stack))
+		return (0);
+	return (1);
 }
 
 int	sort_big_list(t_stack *stack)
@@ -70,14 +98,13 @@ int	sort_big_list(t_stack *stack)
 	if (!median)
 		return (0);
 	while (i == 0 || i < nb_elem / 60 + modulo - 1)
+		if (!loop_median(&oldmedian, &median, &i, stack))
+			return (0);
+	if (!last_median(oldmedian, median[i - 1], stack))
 	{
-		under_median_goes_b(oldmedian, median[i], stack);
-		alignate_median_push_elem(&oldmedian, &median, &i, stack);
+		free(median);
+		return (0);
 	}
-	higher_median_goes_b(median[i - 1], stack);
-	alignate_median(oldmedian, stack);
-	pushback_to_a(stack);
-	order_list(stack);
 	free(median);
 	return (1);
 }

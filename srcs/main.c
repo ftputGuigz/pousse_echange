@@ -14,7 +14,6 @@
 
 int	main(int ac, char **av)
 {
-	int		ret;
 	t_stack	stack;
 
 	if (ac == 1)
@@ -22,17 +21,12 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
-	initialize_stack(&stack);
-	ret = register_datas(av, &stack);
-	if (!ret)
+	if (!initialize_stack(&stack) || !register_datas(av, &stack)
+		|| !push_swap(&stack))
 	{
 		ft_putstr_fd("Error\n", 2);
 		free_stack_ptr(&stack);
 		return (0);
 	}
-	ret = push_swap(&stack);
-	if (!ret)
-		ft_putstr_fd("Error\n", 2);
-	free_stack_ptr(&stack);
 	return (0);
 }
