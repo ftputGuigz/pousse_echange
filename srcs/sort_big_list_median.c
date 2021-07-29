@@ -81,21 +81,20 @@ int	count_elem_needed(int oldmedian, int median, t_stack *stack)
 	return (count);
 }
 
-int	under_median_goes_b(int oldmedian, int median, t_stack *stack)
+int	under_median_goes_b(int oldmed, int median, t_stack *stack)
 {
 	int		count;
 	int		i;
 	t_list	*lst;
 	int		ret;
 
-	count = count_elem_needed(oldmedian, median, stack);
+	count = count_elem_needed(oldmed, median, stack);
 	lst = *(stack->a);
 	i = 0;
 	ret = 1;
 	while (i != count)
 	{
-		if (*((int *)lst->content) <= median
-			&& *((int *)lst->content) > oldmedian)
+		if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmed)
 		{
 			ret = pb(stack);
 			i++;
@@ -106,8 +105,7 @@ int	under_median_goes_b(int oldmedian, int median, t_stack *stack)
 			return (0);
 		lst = *(stack->a);
 	}
-	if (*((int *)lst->content) <= median
-		&& *((int *)lst->content) > oldmedian)
+	if (*((int *)lst->content) <= median && *((int *)lst->content) > oldmed)
 		ret = pb(stack);
 	return (ret);
 }
