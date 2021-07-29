@@ -23,10 +23,7 @@ int	main(int ac, char **av)
 	}
 	if (!initialize_stack(&stack) || !register_datas(av, &stack)
 		|| !push_swap(&stack))
-	{
 		ft_putstr_fd("Error\n", 2);
-		free_stack_ptr(&stack);
-		return (0);
-	}
+	free_stack_ptr(&stack);
 	return (0);
 }
