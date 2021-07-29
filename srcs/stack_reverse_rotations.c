@@ -81,8 +81,11 @@ int	rrb(t_stack *stack)
 	return (1);
 }
 
-void	rrr(t_stack *stack)
+int	rrr(t_stack *stack)
 {
-	rra(stack);
-	rrb(stack);
+	if (!rra(stack))
+		return (0);
+	if (!rrb(stack))
+		return (0);
+	return (1);
 }
