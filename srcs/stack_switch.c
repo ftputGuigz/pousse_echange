@@ -31,7 +31,7 @@ int	sa(t_stack *stack)
 	void	*content;
 
 	if (!(*(stack->a)))
-		return (0);
+		return (1);
 	size = ft_lstsize(*(stack->a));
 	if (size == 1)
 		return (1);
@@ -56,7 +56,7 @@ int	sb(t_stack *stack)
 	void	*content;
 
 	if (!(*(stack->b)))
-		return (0);
+		return (1);
 	size = ft_lstsize(*(stack->b));
 	if (size == 1)
 		return (1);

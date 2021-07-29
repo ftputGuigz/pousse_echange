@@ -19,7 +19,7 @@ int	pa(t_stack *stack)
 	void	*content;
 
 	if (!(*(stack->b)))
-		return (0);
+		return (1);
 	first = *(stack->b);
 	*(stack->b) = first->next;
 	ft_lstadd_front(stack->a, first);
@@ -44,7 +44,7 @@ int	pb(t_stack *stack)
 	void	*content;
 
 	if (!(*(stack->a)))
-		return (0);
+		return (1);
 	first = *(stack->a);
 	*(stack->a) = first->next;
 	ft_lstadd_front(stack->b, first);
