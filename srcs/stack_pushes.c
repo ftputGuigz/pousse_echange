@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_movements.c                                   :+:      :+:    :+:   */
+/*   stack_pushes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpetit <gpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 14:28:36 by gpetit            #+#    #+#             */
-/*   Updated: 2021/06/25 14:28:37 by gpetit           ###   ########.fr       */
+/*   Created: 2021/07/29 14:55:13 by gpetit            #+#    #+#             */
+/*   Updated: 2021/07/29 14:55:16 by gpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,76 +59,5 @@ int	pb(t_stack *stack)
 		return (0);
 	}
 	ft_lstadd_back(stack->output, new_operation);
-	return (1);
-}
-
-int	sa(t_stack *stack)
-{
-	int		size;
-	t_list	*first;
-	t_list	*second;
-	t_list	*new_operation;
-	void	*content;
-
-	if (!(*(stack->a)))
-		return (0);
-	size = ft_lstsize(*(stack->a));
-	if (size == 1)
-		return (1);
-	first = *(stack->a);
-	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	*stack->a = second;
-	content = ft_strdup("sa");
-	if (!content)
-		return (0);
-	new_operation = ft_lstnew(content);
-	if (!new_operation)
-	{
-		free(content);
-		return (0);
-	}
-	ft_lstadd_back(stack->output, new_operation);
-	return (1);
-}
-
-int	sb(t_stack *stack)
-{
-	int		size;
-	t_list	*first;
-	t_list	*second;
-	t_list	*new_operation;
-	void	*content;
-
-	if (!(*(stack->b)))
-		return (0);
-	size = ft_lstsize(*(stack->b));
-	if (size == 1)
-		return (1);
-	first = *(stack->b);
-	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	*stack->b = second;
-	content = ft_strdup("sb");
-	if (!content)
-		return (0);
-	new_operation = ft_lstnew(content);
-	if (!new_operation)
-	{
-		free(content);
-		return (0);
-	}
-	ft_lstadd_back(stack->output, new_operation);
-	return (1);
-}
-
-int	ss(t_stack *stack)
-{
-	if (!sa(stack))
-		return (0);
-	if (!sb(stack))
-		return (0);
 	return (1);
 }
