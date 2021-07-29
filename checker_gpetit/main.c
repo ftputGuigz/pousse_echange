@@ -88,9 +88,9 @@ int	execute_moves(t_stack *stack)
 	return (1);
 }
 
-void	check_if_pile_a_sorted(t_list *pile_a)
+void	check_if_pile_a_sorted(t_list *pile_a, t_list *pile_b)
 {
-	if (is_sorted(pile_a))
+	if (is_sorted(pile_a) && !pile_b)
 		ft_putstr_fd("OK\n", STDOUT_FILENO);
 	else
 		ft_putstr_fd("KO\n", STDOUT_FILENO);
@@ -117,7 +117,7 @@ int	main(int ac, char **av)
 		free_stack_ptr(&stack);
 		return (0);
 	}
-	check_if_pile_a_sorted(*(stack.a));
+	check_if_pile_a_sorted(*(stack.a), *(stack.b));
 	free_stack_ptr(&stack);
 	return (0);
 }

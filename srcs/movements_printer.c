@@ -22,6 +22,8 @@ int	get_first_stack_elem(t_list *lst)
 
 int	is_sorted(t_list *lst)
 {
+	if (!lst)
+		return (0);
 	while (lst->next)
 	{
 		if (*((int *)lst->content) > *((int *)lst->next->content))
