@@ -76,5 +76,6 @@ void	first_under_median_goes_b(int oldmedian, int median, t_stack *stack);
 int		under_median_goes_b(int oldmedian, int median, t_stack *stack);
 int		higher_median_goes_b(int median, t_stack *stack);
 int		pushback_to_a(t_stack *stack);
+int		alignate_median(int median, t_stack *stack);
 
 #endif
