@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_reverse_rotations.c                          :+:      :+:    :+:   */
+/*   list_movements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpetit <gpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 15:42:33 by gpetit            #+#    #+#             */
-/*   Updated: 2021/06/25 15:42:34 by gpetit           ###   ########.fr       */
+/*   Created: 2021/06/25 14:28:36 by gpetit            #+#    #+#             */
+/*   Updated: 2021/06/25 14:28:37 by gpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*ft_lst_penultimate(t_list *lst)
+void	switch_first_second(t_list **stack)
 {
-	if (!lst || !(lst->next))
-		return (NULL);
-	while (lst->next->next)
-		lst = lst->next;
-	return (lst);
+	t_list	*first;
+	t_list	*second;
+
+	first = *stack;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
 }
 
-int	rra(t_stack *stack)
+int	sa(t_stack *stack)
 {
 	int		size;
-	t_list	*penultimate;
 	t_list	*new_operation;
 	void	*content;
 
@@ -33,10 +35,8 @@ int	rra(t_stack *stack)
 	size = ft_lstsize(*(stack->a));
 	if (size == 1)
 		return (1);
-	penultimate = ft_lst_penultimate(*(stack->a));
-	ft_lstadd_front(stack->a, penultimate->next);
-	penultimate->next = NULL;
-	content = ft_strdup("rra");
+	switch_first_second(stack->a);
+	content = ft_strdup("sa");
 	if (!content)
 		return (0);
 	new_operation = ft_lstnew(content);
@@ -49,10 +49,9 @@ int	rra(t_stack *stack)
 	return (1);
 }
 
-int	rrb(t_stack *stack)
+int	sb(t_stack *stack)
 {
 	int		size;
-	t_list	*penultimate;
 	t_list	*new_operation;
 	void	*content;
 
@@ -61,10 +60,8 @@ int	rrb(t_stack *stack)
 	size = ft_lstsize(*(stack->b));
 	if (size == 1)
 		return (1);
-	penultimate = ft_lst_penultimate(*(stack->b));
-	ft_lstadd_front(stack->b, penultimate->next);
-	penultimate->next = NULL;
-	content = ft_strdup("rrb");
+	switch_first_second(stack->b);
+	content = ft_strdup("sb");
 	if (!content)
 		return (0);
 	new_operation = ft_lstnew(content);
@@ -77,11 +74,11 @@ int	rrb(t_stack *stack)
 	return (1);
 }
 
-int	rrr(t_stack *stack)
+int	ss(t_stack *stack)
 {
-	if (!rra(stack))
+	if (!sa(stack))
 		return (0);
-	if (!rrb(stack))
+	if (!sb(stack))
 		return (0);
 	return (1);
 }
