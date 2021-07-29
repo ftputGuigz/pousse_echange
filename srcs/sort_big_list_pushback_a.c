@@ -12,23 +12,16 @@
 
 #include "push_swap.h"
 
-static int	init_size_and_moves(int *moves_max, int *moves_min, t_stack *stack)
+typedef struct s_moves
 {
+	int	max;
+	int	max_backward;
+	int	min;
+	int	min_backward;
 	int	size;
+}	t_moves;
 
-	*moves_max = max_distance_to_exit(stack);
-	*moves_min = min_distance_to_exit(stack);
-	size = ft_lstsize(*(stack->b));
-	return (size);
-}
-
-static void	init_pushback_flags(int *mmb, int *mminb)
-{
-	*mmb = 0;
-	*mminb = 0;
-}
-
-int	set_flag_recalculate_moves(int *flag, int size, int moves)
+int	flag_new_moves(int *flag, int size, int moves)
 {
 	*flag = 1;
 	moves = size - moves;
@@ -50,32 +43,32 @@ static int	move_max_or_min(int flag, int moves, t_stack *stack)
 	return (1);
 }
 
+void	init_moves(t_moves *moves, t_stack *stack)
+{
+	moves->max_backward = 0;
+	moves->min_backward = 0;
+	moves->max = max_distance_to_exit(stack);
+	moves->min = min_distance_to_exit(stack);
+	moves->size = ft_lstsize(*(stack->b));
+}
+
 int	pushback_to_a(t_stack *stack)
 {
-	int	moves_max;
-	int	max_backward;
-	int	moves_min;
-	int	min_backward;
-	int	size;
+	t_moves	moves;
 
 	if (!(*stack->b))
 		return (1);
-	init_pushback_flags(&max_backward, &min_backward);
-	size = init_size_and_moves(&moves_max, &moves_min, stack);
-	if (moves_max > size / 2)
-		moves_max = set_flag_recalculate_moves(&max_backward, size, moves_max);
-	if (moves_min > size / 2)
-		moves_min = set_flag_recalculate_moves(&min_backward, size, moves_min);
-	if (moves_max <= moves_min)
-	{
-		if (!move_max_or_min(max_backward, moves_max, stack))
+	init_moves(&moves, stack);
+	if (moves.max > moves.size / 2)
+		moves.max = flag_new_moves(&moves.max_backward, moves.size, moves.max);
+	if (moves.min > moves.size / 2)
+		moves.min = flag_new_moves(&moves.min_backward, moves.size, moves.min);
+	if (moves.max <= moves.min)
+		if (!move_max_or_min(moves.max_backward, moves.max, stack))
 			return (0);
-	}
-	else if (moves_min < moves_max)
-	{
-		if (!move_max_or_min(min_backward, moves_min, stack))
+	if (moves.min < moves.max)
+		if (!move_max_or_min(moves.min_backward, moves.min, stack))
 			return (0);
-	}
 	if (!(*((int *)(*(stack->b))->content) < *((int *)(*(stack->a))->content)))
 		if (!ra(stack))
 			return (0);
