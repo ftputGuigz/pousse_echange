@@ -32,7 +32,7 @@ void	get_a_b_c(int *a, int *b, int *c, t_list *lst)
 
 int	rotate_head(t_stack *stack, char stack_id)
 {
-	int ret;
+	int	ret;
 
 	if (stack_id == 'a')
 		ret = sa(stack);
