@@ -83,8 +83,6 @@ int	execute_moves(t_stack *stack)
 		if (!ret)
 			return (0);
 		line = register_line();
-		if (!line)
-			return (0);
 	}
 	clean_free(&line);
 	return (1);
