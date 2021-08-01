@@ -101,10 +101,7 @@ int	main(int ac, char **av)
 	t_stack	stack;
 
 	if (ac == 1)
-	{
-		ft_putstr_fd("Error\n", 2);
 		return (0);
-	}
 	if (!initialize_stack(&stack) || !register_datas(av, &stack))
 	{
 		ft_putstr_fd("Error\n", 2);
